@@ -1,0 +1,8 @@
+gg   :   gg
+gg   win
+gg   :   gg
+gg   win
+gg   :   gg
+gg   win
+gg   :   gg
+gg   disconnect

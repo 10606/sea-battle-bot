@@ -1,0 +1,120 @@
+﻿# -*- coding: utf-8 -*-
+#для сервера
+#send_answer(userid, msg) для отправки ответа userid - пользователь msg - текст
+#get_request(userid) возвращает запрос от userid - пользователь первый запрос должен быть поле
+
+#инициализация сессии
+import sys, time, math, random
+import socket
+
+sock = socket.socket()
+#sock = socket()
+sock.bind(("", 13451))
+sock.listen(100)
+conn = []
+addr  = []
+
+def init_sock(sz): #init инициализация сокет соединений вызвать в маине
+    for i in range(sz):
+        conn.append(0)
+        addr.append(0)
+        conn[i], addr[i] = sock.accept()
+        conn[i].setblocking(0)
+        print ('connected:', addr[i])
+
+firstmsgbot = [1, 1]
+timemsgbot = [time.time(), time.time()]
+
+def send_to_client(index, msg):
+    ctr = 0
+    tttime = time.time()
+    while 1:
+        if (time.time() - tttime > 5 * 60):
+            print("player ", index, " not ask")
+            acc = input()
+            return "*"
+        ctr += 1
+        # print('я тута')
+        try:
+            conn[index].send(msg.encode())
+            print("send ", msg, " client ", index)
+            break
+        except Exception as e:
+            time.sleep(3)
+            print(e, ctr, " send", index)
+
+
+def send_answer_sock(index, msg): #отправка ответа
+    return send_to_client(index, msg)
+
+def check_format_field(msg): #проверка что это поле по формату
+    #print('enter the function')
+    count = 100;
+    for i in range (len(msg)):
+        #print(msg)
+        if (msg[i] == '1' or msg[i] == '0'):
+            count -= 1
+    #print(count)
+    return (count == 0)
+
+def check_format_request(message):
+    global user_field
+    message_s = str(message)
+    if len(message_s)<=1:
+        return False
+    if (65 <= ord(message_s[0]) <= 74) and (49 <= ord(message_s[1]) <= 57):
+        if len(message_s) == 2:
+            return True
+        elif len(message_s) == 3 and (ord(message_s[1]) == 49) and (ord(message_s[2]) == 48):
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+def get_from_client(index):
+    msg = ""
+    time_t = time.time()
+    ctr = 0
+    while True:
+        ctr += 1
+        try:
+            data = conn[index].recv(10000)
+        except Exception as e:
+            #time.sleep(1)
+            if (time.time() - time_t > 60):
+                time_t = time.time()
+                print(e, ctr, " get", index)
+            if (firstmsgbot[index] == 0 and timemsgbot[index] - time.time() < -5*60):
+                #send_answer_sock(index, "Поражение")
+                return ("*")
+            continue
+        if not data:
+            break
+        msg = data.decode("utf-8")
+        if (len(msg) > 0):
+            break
+    return msg
+
+def get_request_sock(index): #получение запроса от index 0 или 1
+
+    while (1):
+        msg = get_from_client(index)
+        if (timemsgbot[index] - time.time() < -5 * 60):
+            #send_answer_sock(index, "Поражение")
+            return "*"
+        #если это первый запрос index это должно быть поле
+        if (firstmsgbot[index] == 1):
+            if (check_format_field(msg)):
+                firstmsgbot[index] == 0
+                timemsgbot[index] == time.time()
+                print("get field client ", index)
+                return msg #возвращаем результат запроса
+        # если это не первый запрос index
+        elif (check_format_request(msg)):
+            timemsgbot[index] == time.time()
+            print("get ", msg, " client ", index)
+            return msg #возвращаем результат запроса
+
+#print(get_request(id_bot1))
