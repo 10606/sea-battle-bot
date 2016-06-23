@@ -35,14 +35,14 @@ sock.setblocking(0)
 #sock.connect(('192.168.0.64', 13451))
 
 print("connect")
-
+firstmsg = [0]
 def send_to_server(msg):
     tttime = time.time()
     ctr = 0
     while 1:
         ctr += 1
         # print('я тута')
-        if (time.time() - tttime > 6 * 60):
+        if (time.time() - tttime > 6 * 60 and firstmsg[0]):
             print("server not ask")
             acc = input()
             sys.exit(0)
@@ -69,7 +69,7 @@ def message_get():
             if (time.time() - time_t > 60):
                 time_t = time.time()
                 print(e, ctr)
-            if (last_message - time.time() < -6*60):
+            if (last_message - time.time() < -6*60 and firstmsg[0]):
                 print("time out")
                 accept = input()
                 sys.exit(0)
@@ -113,6 +113,7 @@ def get_answer(a,b):
     send_message(a,b)
     while True:
         msg=message_get()
+        firstmsg[0] = 1
         if msg in mimo:
             return -1
         elif msg in ranen:

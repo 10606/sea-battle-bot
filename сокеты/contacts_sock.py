@@ -106,7 +106,7 @@ def get_request_sock(index): #получение запроса от index 0 и�
 
     while (1):
         msg = get_from_client(index)
-        if (time.time() - timemsgbot[index] > 5 * 60):
+        if (time.time() - timemsgbot[index] > 5 * 60 and firstmsgbot[index] == 0):
             #send_answer_sock(index, "Поражение")
             return "*"
         #если это первый запрос index это должно быть поле
