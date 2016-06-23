@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-import sys, time, math, random, vk#, pygame
+import sys, time, math, random, #vk#, pygame
 from request import *
 from check_field import *
 from contacts_sock import *
