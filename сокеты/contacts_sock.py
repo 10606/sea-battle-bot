@@ -9,7 +9,12 @@ import socket
 
 sock = socket.socket()
 #sock = socket()
-sock.bind(("", 13451))
+
+sin=open('port.txt','r')###
+portc = sin.read()
+sin.close()
+
+sock.bind(("", portc))
 sock.listen(100)
 conn = []
 addr  = []

@@ -3,7 +3,6 @@
 #get_answer(a,b): по координатам a b [1 10] возвращает результат выстрела
 #вызвать init()
 import sys, time, math,random
-import vk
 import socket
 from check_okrest import *
 killed=0
@@ -26,7 +25,11 @@ hin=open('name.txt','r')###
 name = hin.read()
 hin.close()
 
-sock.connect((server_ip, 13451))
+sin=open('port.txt','r')###
+portc = sin.read()
+sin.close()
+
+sock.connect((server_ip, portc))
 sock.setblocking(0)
 #sock.connect(('178.70.195.156', 13451))
 #sock.connect(('192.168.0.64', 13451))
