@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-import sys, time, math, random, #vk#, pygame
+import sys, time, math, random ## pygame
 from request import *
 from check_field import *
 from contacts_sock import *
@@ -48,6 +48,9 @@ def main ():
     #получение и проверка поля бота 1
     name[0] = get_from_client(0)
     send_answer_sock(0, "здравствуйте, " + name[0])
+    sdout = open('result.txt', 'a')  ###
+    sdout.write("client 0: " + name[0] + "\n")
+    sdout.close()
     print("client 0: ", name[0], "\n")
     global gg
     flag1 = 0
@@ -89,9 +92,21 @@ def main ():
                 sys.exit(0)
     if py_flag:
         field_1(field1)
+    sdout = open('result.txt', 'a')  ###
+    sdout.write("field client 0:\n")
+    for i in range(10):
+        for j in range (10):
+            if (j == 9):
+                sdout.write(str(field1[i][j]) + '\n')
+            else:
+                sdout.write(str(field1[i][j]) + ' ')
+    sdout.close()
     #получение и проверка поля бота 2
     name[1] = get_from_client(1)
     send_answer_sock(1, "здравствуйте, " + name[1])
+    sdout = open('result.txt', 'a')  ###
+    sdout.write("client 1: " + name[1] + "\n")
+    sdout.close()
     print("client 1: ", name[1], "\n")
     flag2 = 0
     while (flag2 == 0):
@@ -134,6 +149,16 @@ def main ():
 
     if py_flag:
         field_2(field2)
+    sdout = open('result.txt', 'a')  ###
+    sdout.write("field client 1:\n")
+    for i in range(10):
+        for j in range (10):
+            if (j == 9):
+                sdout.write(str(field2[i][j]) + '\n')
+            else:
+                sdout.write(str(field2[i][j]) + ' ')
+    sdout.close()
+
     ship1 = 10
     ship2 = 10
     player_queue = 1

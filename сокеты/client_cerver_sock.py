@@ -26,7 +26,7 @@ name = hin.read()
 hin.close()
 
 sin=open('port.txt','r')###
-portc = sin.read()
+portc = int(sin.read())
 sin.close()
 
 sock.connect((server_ip, portc))

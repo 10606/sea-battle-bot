@@ -11,7 +11,7 @@ sock = socket.socket()
 #sock = socket()
 
 sin=open('port.txt','r')###
-portc = sin.read()
+portc = int(sin.read())
 sin.close()
 
 sock.bind(("", portc))
@@ -91,7 +91,7 @@ def get_from_client(index):
             if (time.time() - time_t > 60):
                 time_t = time.time()
                 print(e, ctr, " get", index)
-            if (firstmsgbot[index] == 0 and timemsgbot[index] - time.time() < -5*60):
+            if (firstmsgbot[index] == 0 and time.time() - timemsgbot[index] > 5*60):
                 #send_answer_sock(index, "Поражение")
                 return ("*")
             continue
@@ -106,19 +106,19 @@ def get_request_sock(index): #получение запроса от index 0 и�
 
     while (1):
         msg = get_from_client(index)
-        if (timemsgbot[index] - time.time() < -5 * 60):
+        if (time.time() - timemsgbot[index] > 5 * 60):
             #send_answer_sock(index, "Поражение")
             return "*"
         #если это первый запрос index это должно быть поле
         if (firstmsgbot[index] == 1):
             if (check_format_field(msg)):
-                firstmsgbot[index] == 0
-                timemsgbot[index] == time.time()
+                firstmsgbot[index] = 0
+                timemsgbot[index] = time.time()
                 print("get field client ", index)
                 return msg #возвращаем результат запроса
         # если это не первый запрос index
         elif (check_format_request(msg)):
-            timemsgbot[index] == time.time()
+            timemsgbot[index] = time.time()
             print("get ", msg, " client ", index)
             return msg #возвращаем результат запроса
 
