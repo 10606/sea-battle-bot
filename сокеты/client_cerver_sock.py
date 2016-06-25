@@ -38,6 +38,7 @@ print("connect")
 firstmsg = [0]
 def send_to_server(msg):
     tttime = time.time()
+    timeer = time.time()
     ctr = 0
     while 1:
         ctr += 1
@@ -50,8 +51,9 @@ def send_to_server(msg):
             sock.send(msg.encode())
             break
         except Exception as e:
-            time.sleep(3)
-            print(e, ctr)
+            if (time.time() - timeer > 60):
+                timeer = time.time()
+                print(e, ctr)
 
 
 
@@ -97,9 +99,9 @@ def send_message(x,y):
             print(letter[y-1]+str(x))
             break
         except Exception as e:
-            time.sleep(5)
+            #time.sleep(5)
             print(e, ctr)
-    time.sleep(3)
+    #time.sleep(3)
             
     
 # принимаем сообщение соперника о его выстреле (строка вида <буква ABCDEFGHIJ><число 12345678910>, иначе - ошибка)
@@ -127,7 +129,21 @@ def get_answer(a,b):
             acc = input()
             sys.exit(0)
 
-            
+def get_result(a, b):
+    send_message(a, b)
+    while True:
+        msg = message_get()
+        firstmsg[0] = 1
+        if msg in mimo:
+            return "Промах"
+        elif msg in ranen:
+            return "Ранение"
+        elif msg in ubit:
+            return "Убит"
+        elif msg in used:
+            return "Вы уже стреляли сюда"
+        elif msg == 'Поражение' or msg == 'Победа':
+            return (msg)
 
 # проверяет, не закончилась ли игра
 def checker(field):

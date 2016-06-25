@@ -79,6 +79,7 @@ def main ():
         flag1 = check_field(field1)
         if (flag1 == 0):
             if (send_answer_sock(0, "0") == "*"):
+                send_answer_sock(1, "Победа")
                 sys.stdout = open('result.txt', 'a')  ###
                 print(name[0], "  :  ", name[1])
                 print(name[0], "  disconnect")
@@ -86,6 +87,7 @@ def main ():
         if (flag1 == 1):
             firstmsgbot[0] = 0
             if (send_answer_sock(0, "1") == "*"):
+                send_answer_sock(1, "Победа")
                 sys.stdout = open('result.txt', 'a')  ###
                 print(name[0], "  :  ", name[1])
                 print(name[0], "  disconnect")
@@ -134,6 +136,7 @@ def main ():
         flag2 = check_field(field2)
         if (flag2 == 0):
             if (send_answer_sock(1, "0") == "*"):
+                send_answer_sock(0, "Победа")
                 sys.stdout = open('result.txt', 'a')  ###
                 print(name[0], "  :  ", name[1])
                 print(name[1], "  disconnect")
@@ -142,6 +145,7 @@ def main ():
         if (flag2 == 1):
             firstmsgbot[1] = 0
             if (send_answer_sock(1, "1") == "*"):
+                send_answer_sock(0, "Победа")
                 sys.stdout = open('result.txt', 'a')  ###
                 print(name[0], "  :  ", name[1])
                 print(name[1], "  disconnect")
@@ -170,6 +174,7 @@ def main ():
             while True:
                 #print('get_request')
                 temp1 = get_request_sock(0)
+                #time.sleep(30)
                 if (temp1 == "*"):
                     send_answer_sock(1, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
@@ -184,6 +189,7 @@ def main ():
                 else:
                     gg += 1
                     if (send_answer_sock(0, used[gg % len(used)]) == "*"):
+                        send_answer_sock(1, "Победа")
                         sys.stdout = open('result.txt', 'a')  ###
                         print(name[0], "  :  ", name[1])
                         print(name[0], "  disconnect")
@@ -198,6 +204,7 @@ def main ():
                                    picture_beside))
                     miss.play()
                 if (send_answer_sock(0, get_tue_ans("Промах")) == "*"):
+                    send_answer_sock(1, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
                     print(name[0], "  :  ", name[1])
                     print(name[0], "  disconnect")
@@ -210,6 +217,7 @@ def main ():
                                    picture_hit))
                     wound.play()
                 if (send_answer_sock(0, get_tue_ans("Ранение")) == "*"):
+                    send_answer_sock(1, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
                     print(name[0], "  :  ", name[1])
                     print(name[0], "  disconnect")
@@ -221,6 +229,7 @@ def main ():
                                    picture_hit))
                     kill.play()
                 if (send_answer_sock(0, get_tue_ans("Убит")) == "*"):
+                    send_answer_sock(1, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
                     print(name[0], "  :  ", name[1])
                     print(name[0], "  disconnect")
@@ -232,6 +241,7 @@ def main ():
             while True:
                 #print('get_request')
                 temp2 = get_request_sock(1)
+                #time.sleep(30)
                 if (temp2 == "*"):
                     send_answer_sock(0, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
@@ -247,6 +257,7 @@ def main ():
                 else:
                     gg += 1
                     if (send_answer_sock(1, used[gg % len(used)]) == "*"):
+                        send_answer_sock(0, "Победа")
                         sys.stdout = open('result.txt', 'a')  ###
                         print(name[0], "  :  ", name[1])
                         print(name[1], "  disconnect")
@@ -261,6 +272,7 @@ def main ():
                                    picture_beside))
                     miss.play()
                 if (send_answer_sock(1, get_tue_ans("Промах")) == "*"):
+                    send_answer_sock(0, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
                     print(name[0], "  :  ", name[1])
                     print(name[1], "  disconnect")
@@ -273,6 +285,7 @@ def main ():
                                    picture_hit))
                     wound.play()
                 if (send_answer_sock(1, get_tue_ans("Ранение")) == "*"):
+                    send_answer_sock(0, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
                     print(name[0], "  :  ", name[1])
                     print(name[1], "  disconnect")
@@ -284,6 +297,7 @@ def main ():
                                    picture_hit))
                     kill.play()
                 if (send_answer_sock(1, get_tue_ans("Убит")) == "*"):
+                    send_answer_sock(0, "Победа")
                     sys.stdout = open('result.txt', 'a')  ###
                     print(name[0], "  :  ", name[1])
                     print(name[1], "  disconnect")

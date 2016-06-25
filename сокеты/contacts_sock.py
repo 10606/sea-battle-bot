@@ -33,10 +33,10 @@ timemsgbot = [time.time(), time.time()]
 def send_to_client(index, msg):
     ctr = 0
     tttime = time.time()
+    timeer = time.time()
     while 1:
         if (time.time() - tttime > 5 * 60):
             print("player ", index, " not ask")
-            acc = input()
             return "*"
         ctr += 1
         # print('я тута')
@@ -45,8 +45,9 @@ def send_to_client(index, msg):
             print("send ", msg, " client ", index)
             break
         except Exception as e:
-            time.sleep(3)
-            print(e, ctr, " send", index)
+            if (time.time() - timeer > 60):
+                print(e, ctr, " send", index)
+                timeer = time.time()
 
 
 def send_answer_sock(index, msg): #отправка ответа
