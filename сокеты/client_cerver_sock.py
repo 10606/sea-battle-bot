@@ -102,8 +102,7 @@ def send_message(x,y):
             #time.sleep(5)
             print(e, ctr)
     #time.sleep(3)
-            
-    
+
 # принимаем сообщение соперника о его выстреле (строка вида <буква ABCDEFGHIJ><число 12345678910>, иначе - ошибка)
 def get_coordinate():
     letter = 'ABCDEFGHIJ'
@@ -116,6 +115,7 @@ def get_answer(a,b):
     while True:
         msg=message_get()
         firstmsg[0] = 1
+        #print("get (" + msg + ") from server")
         if msg in mimo:
             return -1
         elif msg in ranen:
@@ -124,7 +124,11 @@ def get_answer(a,b):
             return 2
         elif msg in used:
             return 3
-        elif msg == 'Поражение' or msg=='Победа':
+        elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
+            print("Победа")
+            acc = input()
+            sys.exit(0)
+        elif msg == 'Поражение' or msg =='Победа':
             print(msg)
             acc = input()
             sys.exit(0)
@@ -134,6 +138,7 @@ def get_result(a, b):
     while True:
         msg = message_get()
         firstmsg[0] = 1
+        #print("get (" + msg + ") from server")
         if msg in mimo:
             return "Промах"
         elif msg in ranen:
@@ -144,6 +149,8 @@ def get_result(a, b):
             return "Вы уже стреляли сюда"
         elif msg == 'Поражение' or msg == 'Победа':
             return (msg)
+        elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
+            return ("Победа")
 
 # проверяет, не закончилась ли игра
 def checker(field):

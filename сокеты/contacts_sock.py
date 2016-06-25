@@ -18,17 +18,17 @@ sock.bind(("", portc))
 sock.listen(100)
 conn = []
 addr  = []
-
-def init_sock(sz): #init инициализация сокет соединений вызвать в маине
+firstmsgbot = []
+timemsgbot = []
+def init_sock(sz, iindex): #init инициализация сокет соединений вызвать в маине
     for i in range(sz):
         conn.append(0)
         addr.append(0)
-        conn[i], addr[i] = sock.accept()
-        conn[i].setblocking(0)
-        print ('connected:', addr[i])
-
-firstmsgbot = [1, 1]
-timemsgbot = [time.time(), time.time()]
+        firstmsgbot.append(1)
+        timemsgbot.append(time.time())
+        conn[i + iindex], addr[i + iindex] = sock.accept()
+        conn[i + iindex].setblocking(0)
+        print ('connected:', addr[i + iindex])
 
 def send_to_client(index, msg):
     ctr = 0
