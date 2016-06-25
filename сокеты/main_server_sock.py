@@ -308,7 +308,7 @@ def main ():
             shots[-1].render()
             window.blit(screen,(0,0))
             pygame.display.flip()
-    time.sleep(3)
+    #time.sleep(3)
     if (ship1 == 0):
         send_answer_sock(0, "Поражение")
         send_answer_sock(1, "Победа")
