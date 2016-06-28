@@ -16,7 +16,7 @@ conn.append(0)
 addr.append(0)
 conn[0], addr[0] = sock.accept()
 print ('connected:', addr[0])
-#conn[i + iindex].setblocking(0)
+conn[0].setblocking(0)
 send = ""
 
 
@@ -24,23 +24,51 @@ send = ""
 #send = "<html>\n<body>\n<div>" + send
 #send += "</div>\n</body>\n</html>"
 
-#print("[" + send + "]")
-def send_pic(file_name):
+#print("[" + send + "]")'
+
+
+def send_to_client(msg, index):
+    t_time = time.time()
+    while 1:
+        try:
+            #print("send")
+            conn[index].send(str(len(msg)).encode())
+            break
+        except Exception as e:
+            if (time.time() - t_time > 60):
+                print(e)
+                return "*"
+
+    t_time = time.time()
+    while 1:
+        try:
+            #print("get")
+            data = conn[index].recv(10000)
+            break
+        except Exception as e:
+            if (time.time() - t_time > 60):
+                print(e)
+                return "*"
+
+    t_time = time.time()
+    while 1:
+        try:
+            #print("send")
+            conn[index].send(msg)
+            # print("send ", msg, " client ")
+            break
+        except Exception as e:
+            if (time.time() - t_time > 60):
+                print(e)
+                return "*"
+
+def send_pic(file_name, index):
     sin=open(file_name,'rb')###
     send = sin.read()
     sin.close()
-    def send_to_client(msg):
-        conn[0].send(str(len(msg)).encode())
-        data = conn[0].recv(10000)
-        while 1:
-            try:
-                conn[0].send(msg)
-                #print("send ", msg, " client ")
-                break
-            except Exception as e:
-                print(e, " send")
-
-    send_to_client(send)
+    if (send_to_client(send, index) == "*"):
+        return "*"
 
 
-send_pic('captureqwsx.bmp')
+#send_pic('captureqwsx.bmp')
+send_pic('background1.jpg', 0)
