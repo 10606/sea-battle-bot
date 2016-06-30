@@ -421,6 +421,11 @@ def main ():
         iter_ += 1
     #time.sleep(3)
     if (ship1 == 0):
+        stdout = open('result.txt', 'a')  ###
+        stdout.write(sdout)
+        stdout.write(name[0] + "  :  " + name[1] + "\n")
+        stdout.write(name[1] + "  win" + "\n" + "\n")
+        stdout.close()
         send_answer_sock(iindex + 0, "Поражение")
         draw(to_draw1, to_draw2)
         print('ready send picture to client1 ', iindex)
@@ -431,12 +436,12 @@ def main ():
         print('ready send picture to client1 ', iindex + 1)
         send_pic('ready.jpg',iindex+1)
         print('send picture to client1 ', iindex + 1)
+    else:
         stdout = open('result.txt', 'a')  ###
         stdout.write(sdout)
         stdout.write(name[0] + "  :  " + name[1] + "\n")
-        stdout.write(name[1] + "  win" + "\n" + "\n")
+        stdout.write(name[0] + "  win" + "\n" + "\n")
         stdout.close()
-    else:
         send_answer_sock(iindex + 1, "Поражение")
         draw(to_draw2, to_draw1)
         print('ready send picture to client2 ', iindex + 1)
@@ -447,11 +452,8 @@ def main ():
         print('ready send picture to client2 ', iindex)
         send_pic('ready.jpg',iindex+0)
         print('send picture to client2 ', iindex)
-        stdout = open('result.txt', 'a')  ###
-        stdout.write(sdout)
-        stdout.write(name[0] + "  :  " + name[1] + "\n")
-        stdout.write(name[0] + "  win" + "\n" + "\n")
-        stdout.close()
+
+
 #main()
 
 t = []
