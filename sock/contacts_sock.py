@@ -104,7 +104,7 @@ def get_from_client(index):
     return msg
 
 def get_request_sock(index): #получение запроса от index 0 или 1
-
+    timemsgbot[index] = time.time()
     while (1):
         msg = get_from_client(index)
         if (time.time() - timemsgbot[index] > 5 * 60 and firstmsgbot[index] == 0):

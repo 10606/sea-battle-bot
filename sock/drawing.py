@@ -37,7 +37,7 @@ def recover(field):
 3 - есть раненый корабль
 4 - есть убитый корабль
 '''
-def draw(field1, field2):
+def draw(field1, field2, index):
     field = Image.open('field.jpg')
     draw = ImageDraw.Draw(field)
     width = field.size[0]
@@ -107,7 +107,7 @@ def draw(field1, field2):
             now_x += 30
         now_y += 30
         now_x = 450
-    field.save('ready.jpg','JPEG')
+    field.save('ready' + str(index) + '.jpg', 'JPEG')
     field.close()
 
     

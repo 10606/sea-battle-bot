@@ -136,8 +136,9 @@ def get_answer(a,b):
         elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
             print("Победа")
             if py_flag:
-                get_pic('result.jpg',sock)
-                res =  Image.open('result.jpg')
+                unique_add = str(random.randint(0, 10 ** 9))
+                get_pic('result' + unique_add + '.jpg',sock)
+                res =  Image.open('result' + unique_add + '.jpg')
                 res.show()
                 res.close()
             acc = input()
@@ -145,8 +146,9 @@ def get_answer(a,b):
         elif msg == 'Поражение' or msg =='Победа':
             print(msg)
             if py_flag:
-                get_pic('result.jpg',sock)
-                res =  Image.open('result.jpg')
+                unique_add = str(random.randint(0, 10 ** 9))
+                get_pic('result' + unique_add + '.jpg',sock)
+                res =  Image.open('result' + unique_add + '.jpg')
                 res.show()
                 res.close()
             acc = input()

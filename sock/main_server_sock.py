@@ -22,7 +22,8 @@ def send_to_client1(msg, index):
         try:
             #print("get")
             data = conn[index].recv(10000)
-            break
+            if (data.decode('utf-8') == "134"):
+                break
         except Exception as e:
             if (time.time() - t_time > 60):
                 print(e, " get accept len from client ", index)
@@ -427,14 +428,14 @@ def main ():
         stdout.write(name[1] + "  win" + "\n" + "\n")
         stdout.close()
         send_answer_sock(iindex + 0, "Поражение")
-        draw(to_draw1, to_draw2)
+        draw(to_draw1, to_draw2, iindex)
         print('ready send picture to client1 ', iindex)
-        send_pic('ready.jpg',iindex+0)
+        send_pic('ready' + str(iindex) + '.jpg',iindex+0)
         print('send picture to client1 ', iindex)
         send_answer_sock(iindex + 1, "Победа")
-        draw(to_draw2, to_draw1)
+        draw(to_draw2, to_draw1, iindex)
         print('ready send picture to client1 ', iindex + 1)
-        send_pic('ready.jpg',iindex+1)
+        send_pic('ready' + str(iindex) + '.jpg',iindex+1)
         print('send picture to client1 ', iindex + 1)
     else:
         stdout = open('result.txt', 'a')  ###
@@ -443,14 +444,14 @@ def main ():
         stdout.write(name[0] + "  win" + "\n" + "\n")
         stdout.close()
         send_answer_sock(iindex + 1, "Поражение")
-        draw(to_draw2, to_draw1)
+        draw(to_draw2, to_draw1, iindex)
         print('ready send picture to client2 ', iindex + 1)
-        send_pic('ready.jpg',iindex+1)
+        send_pic('ready' + str(iindex) + '.jpg',iindex+1)
         print('send picture to client2 ', iindex + 1)
         send_answer_sock(iindex + 0, "Победа")
-        draw(to_draw1, to_draw2)
+        draw(to_draw1, to_draw2, iindex)
         print('ready send picture to client2 ', iindex)
-        send_pic('ready.jpg',iindex+0)
+        send_pic('ready' + str(iindex) + '.jpg',iindex+0)
         print('send picture to client2 ', iindex)
 
 
