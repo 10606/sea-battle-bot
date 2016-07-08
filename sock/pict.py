@@ -5,7 +5,25 @@ def get_list_byte(sock, i):
     t_time = time.time()
     while True:
         try:
-            data = sock.recv(100000)
+            data = sock.recv(120)
+            #print("empty: ", data)
+            if (len(data) < 20):
+                continue
+            #print("get ", data, len(data))
+            pos1 = data[0:10]
+            #print(pos1)
+            pos0 = (pos1).decode('utf-8')
+            #print(pos0)
+            pos = int(pos0)
+            siz1 = data[10:20]
+            # print(siz1)
+            siz0 = (siz1).decode('utf-8')
+            #print(siz0)
+            siz = int(siz0)
+            #print(pos, len(data))
+            if (len(data) < siz or pos != i):
+                continue
+            data = data[20 : siz]
         except Exception as e:
             if (time.time() - t_time > 60):
                 print(e)
@@ -48,7 +66,7 @@ def get_pic(file_name,sock):
     while (dwreadbuf < size):
         data = "*"
         while (data == "*"):
-            data = get_list_byte(sock, i)
+            data = get_list_byte(sock, dwreadbuf)
             if (iter > 100000):
                 stdout.close()
                 return "*"

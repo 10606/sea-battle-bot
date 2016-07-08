@@ -5,12 +5,30 @@ from check_field import *
 from contacts_sock import *
 from drawing import *
 
+def get_null_string(gg):
+    k = 10 - len(gg)
+    hh = '0' * k
+    ss = hh + gg
+    return ss
+
+
+def get_pref(index, length):
+    temp0 = get_null_string(str(index))
+    temp2 = get_null_string(str(length))
+    ans0 = temp0 + temp2
+    ans1 = ans0.encode('utf-8')
+    return ans1
+
 def send_to_client1(msg, index):
     t_time = time.time()
     while 1:
         try:
             #print("send")
-            conn[index].send(str(len(msg)).encode())
+            temp = str(len(msg)).encode()
+            print(temp)
+            temp = get_pref(0, len(temp) + 20) + temp
+            print(temp)
+            conn[index].send(temp)
             break
         except Exception as e:
             if (time.time() - t_time > 60):
@@ -19,10 +37,13 @@ def send_to_client1(msg, index):
 
     t_time = time.time()
     while 1:
+        #print("zaebal")
         try:
             #print("get")
             data = conn[index].recv(10000)
-            if (data.decode('utf-8') == "134"):
+            ttmp = data.decode('utf-8')
+            print(ttmp)
+            if ((len(ttmp) >= len("134")) and (ttmp[-len("134") : ] == "134")):
                 break
         except Exception as e:
             if (time.time() - t_time > 60):
@@ -37,8 +58,19 @@ def send_to_client1(msg, index):
                 #print("send")
                 #print("send " , i , " to ", index)
                 temp = msg[i:min(len(msg),i+100)]
+                #temp1 = bytearray(temp)
+                #print(len(temp1))
+                temm = get_pref(i, len(temp) + 20)
+                #temm1 = bytearray(temm)
+                #print(temm, temp)
+                #print("temp1 ", type(temp1))
+                #print("temp ", type(temp))
+                #print("temm ", type(temm))
+                #print("temm1 ", type(temm1))
+                temr = temm + temp
+                #print('length of sender: ' + len(temp1))
                 #temp += (i // 100) << len(temp)
-                conn[index].send(temp)
+                conn[index].send(temr)
                 # print("send ", msg, " client ")
                 flag = 0
                 tt_time = time.time()
@@ -46,8 +78,10 @@ def send_to_client1(msg, index):
                     try:
                         # print("get")
                         data = conn[index].recv(10000)
-                        flag = 1
-                        break
+                        ttmp = data.decode('utf-8')
+                        if ((len(ttmp) >= len("134")) and (ttmp[-len("134"):] == "134")):
+                            flag = 1
+                            break
                     except Exception as e:
                         if (time.time() - tt_time > 5):
                             flag = 0
@@ -59,6 +93,7 @@ def send_to_client1(msg, index):
                 else:
                     continue
             except Exception as e:
+                print(e)
                 if (time.time() - t_time > 60):
                     print(e, " send picture to client ", index)
                     return "*"
