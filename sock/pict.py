@@ -5,7 +5,7 @@ def get_list_byte(sock, i):
     t_time = time.time()
     while True:
         try:
-            data = sock.recv(1020)
+            data = sock.recv(20)
             #print("empty: ", data)
             if (len(data) < 20):
                 continue
@@ -21,9 +21,10 @@ def get_list_byte(sock, i):
             #print(siz0)
             siz = int(siz0)
             #print(pos, len(data))
-            if (len(data) < siz or pos != i):
+            data = sock.recv(siz)
+            if (len(data) + 20 < siz or pos != i):
                 continue
-            data = data[20 : siz]
+            #data = data[20 : siz]
         except Exception as e:
             if (time.time() - t_time > 60):
                 print(e)
