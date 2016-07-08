@@ -26,23 +26,17 @@ ubit = ['Убит','убит','Убил','убил']
 
 #получение сообщения
 def message_get():
-    global last_message
     while True:
         #print('я тута')
-        time.sleep(3)
         msg=''
         try:
-            new_msg = api.messages.getHistory(offset=0, count=1, user_id=id_server, rev=0);
-            msg=new_msg[1]['body']
-            date=new_msg[1]['date']
-            if (len(new_msg) == 0):
-                continue
-            if (new_msg[1]['uid'] != id_server):
-                continue
-            #msg=input() ####
-            #break ###
-            if date!=last_message:
-                last_message=date
+            in_= open('talking.txt','r')
+            z = in_.read()
+            #print('z =',z)
+            in_.close()
+            if z[:6] == 'server':
+                msg = z[7:]
+                #print(msg)
                 break
         except Exception as e:
             print(e)
@@ -55,13 +49,15 @@ def send_message(x,y):
     while 1:
         ctr+=1
         try:
-            api.messages.send(user_id=id_server, message=letter[y - 1] + str(x))
-            print(letter[y-1]+str(x))
+            out = open('talking.txt','w')
+            out.write('bot\n')
+            out.write(letter[y-1]+str(x))
+            out.close()
+            #api.messages.send(user_id=id_server, message=letter[y - 1] + str(x))
+            #print(letter[y-1]+str(x))
             break
         except Exception as e:
-            time.sleep(5)
             print(e, ctr)
-    time.sleep(3)
             
     
 # принимаем сообщение соперника о его выстреле (строка вида <буква ABCDEFGHIJ><число 12345678910>, иначе - ошибка)
@@ -193,7 +189,10 @@ def send_field_to_server(field):
         msg += "\n"
     while True:
         try:
-            api.messages.send(user_id=id_server, message=msg)
+            out = open('talking.txt','w')
+            out.write('bot\n')
+            out.write(msg)
+            out.close()
             break
         except Exception as e:
             print(e)
@@ -204,6 +203,7 @@ def send_field():
         print("send_field")
         send_field_to_server(temp_field)
         temp = str(message_get())
+        #print('hey',temp)
         if temp == "1":
             return
         

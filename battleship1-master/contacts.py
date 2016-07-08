@@ -7,6 +7,7 @@
 import sys, time, math, random, vk
 from drawing import *
 from message import *
+TL = 2
 sys.stdin = open('token_server.txt','r')
 token = input()
 sys.stdin.close()
@@ -34,10 +35,10 @@ def send_answer(userid, msg): #отправка ответа
         ctr+=1
         #print('я тута')
         try:
-            messages_send(userid, msg);
+            messages_send(userid, msg)
             break
         except Exception as e:
-            time.sleep(3)
+            time.sleep(1)
             print(e,ctr)
 
 
@@ -72,7 +73,8 @@ def check_format_request(message):
     else:
         return False
 
-
+def get_msg(userid):
+    return(api.messages.getHistory(offset = 0, count = 1, user_id = userid, rev = 0))
 def get_request(userid): #получение запроса от userid
     start_time=time.time()
     while (1):
@@ -86,29 +88,40 @@ def get_request(userid): #получение запроса от userid
                 messages_send(str(id_bot2),'Победа')
             sys.exit(0)
         try:
-            new_msg = api.messages.getHistory(offset = 0, count = 1, user_id = userid, rev = 0)
+            if userid == id_bot1:
+                while True:
+                    in_=open('talking.txt','r')
+                    z=in_.read()
+                    if z[:3] == 'bot':
+                        new_msg = [0, {}]
+                        new_msg[1]['body'] = z[4:]
+                        new_msg[1]['date'] = time.time()
+                        new_msg[1]['uid'] = userid
+                        break
+            else:
+                new_msg = get_msg(userid)
         except Exception as e:
             print(e)
-            time.sleep(3)
+            time.sleep(1)
             continue
         if (len(new_msg) <=1):
-            time.sleep(3)
+            time.sleep(1)
             continue
         msg = new_msg[1]['body']
         date = new_msg[1]['date']
         
         if (new_msg[1]['uid'] != userid):
-            time.sleep(3)
+            time.sleep(1)
             continue
         if msg in need_help:
             #print('here')
             messages_send(str(id_bot2), helping_str)
-            time.sleep(2)
+            time.sleep(TL)
             continue
         if msg in rules:
             messages_send(str(id_bot2), rule1)
             messages_send(str(id_bot2), rule2)
-            time.sleep(2)
+            time.sleep(TL)
             continue
         #если это первый запрос userid это должно быть поле
         if ((userid == id_bot1 and firstmsgbot[0] == 1 and timemsgbot[0] != date) or
@@ -127,6 +140,6 @@ def get_request(userid): #получение запроса от userid
             else:
                 timemsgbot[1] = date
             return msg #возвращаем результат запроса
-        time.sleep(3)
+        time.sleep(TL)
 
 #print(get_request(id_bot1))

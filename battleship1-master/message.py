@@ -1,6 +1,10 @@
 import requests, sys,time,json, urllib.request,vk
+TL = 2
 sys.stdin=open('token_server.txt','r')
 token=input()
+sys.stdin.close()
+sys.stdin=open('bot1.txt','r')
+bo=input()
 sys.stdin.close()
 sys.stdin=open('capt_chat.txt','r')
 bot1=input()
@@ -13,6 +17,13 @@ captcha=input()
 sys.stdin.close()
 #отправляет сообщение пользователю to_id (с обходом капчи)
 def messages_send(to_id, msg):
+    if str(to_id) == bo:
+        #print('msg =', msg)
+        out = open('talking.txt','w')
+        out.write('server\n')
+        out.write(str(msg))
+        out.close()
+        return
     print('sending message to ',to_id)
     while True:
         try:
@@ -45,12 +56,12 @@ def messages_send(to_id, msg):
                 photo_id=photo_id[0]['id']
                 print('sending message')
                 api.messages.send(user_id = bot1, message='Чтобы продолжить игру введите эту капчу (прямо сюда)', attachment = photo_id)
-                time.sleep(3)
+                time.sleep(TL)
                 api.messages.send(user_id = bot2, message='Чтoбы продолжить игру введите эту капчу (прямо сюда)', attachment = photo_id)
                 print('ready')
                 while True:
                     flag=True
-                    time.sleep(3)
+                    time.sleep(TL)
                     new_msg = api.messages.getHistory(offset=0, count=1, user_id=bot2, rev=0)
                     mesg=new_msg[1]['body']
                     print(mesg)
@@ -62,7 +73,7 @@ def messages_send(to_id, msg):
                     if flag:
                         break
                     flag=True
-                    time.sleep(3)
+                    time.sleep(TL)
                     new_msg = api.messages.getHistory(offset=0, count=1, user_id=bot1, rev=0)
                     mesg=new_msg[1]['body']
                     print(mesg)
@@ -80,7 +91,7 @@ def messages_send(to_id, msg):
                 r=requests.get(url, params=par)
                 if len(str(r.text))>25:
                     api.messages.send(user_id = bot2, message='Введите другую капчу')
-                    time.sleep(3)
+                    time.sleep(1)
                     api.messages.send(user_id = bot1, message='Введите другую кaпчу')
                     continue
                 else:
@@ -89,4 +100,4 @@ def messages_send(to_id, msg):
                 break
         except Exception as e:
             print(e)
-            time.sleep(5)
+            time.sleep(TL)
