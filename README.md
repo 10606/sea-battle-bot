@@ -9,7 +9,15 @@ client_cerver_sock.py - версия для игры с сервером:
   send_to_server(msg) - пытается отправить сообщение msg, если сервер не отвечает, выводит сообщение об ошибке
   message_get() - 
   send_message(x,y) - 
-  get_coordinate() - 
+  get_coordinate() - принимаем сообщение соперника о его выстреле
+    
   get_answer(a,b) - 
-  get_result(a,b)
-  checker(field)
+  get_result(a,b) - 
+  checker(field) - проверяет, не закончилась ли игра
+    
+  get_ships(length, field) - 
+  change_field(field) - 
+  make_field() - 
+  send_field_to_server(field) - 
+  send_field() - 
+  init() - начинает игру
