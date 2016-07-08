@@ -5,7 +5,7 @@ def get_list_byte(sock, i):
     t_time = time.time()
     while True:
         try:
-            data = sock.recv(120)
+            data = sock.recv(1020)
             #print("empty: ", data)
             if (len(data) < 20):
                 continue

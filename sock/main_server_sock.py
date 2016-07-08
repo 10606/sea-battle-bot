@@ -57,7 +57,7 @@ def send_to_client1(msg, index):
             try:
                 #print("send")
                 #print("send " , i , " to ", index)
-                temp = msg[i:min(len(msg),i+100)]
+                temp = msg[i:min(len(msg),i+1000)]
                 #temp1 = bytearray(temp)
                 #print(len(temp1))
                 temm = get_pref(i, len(temp) + 20)
@@ -71,6 +71,7 @@ def send_to_client1(msg, index):
                 #print('length of sender: ' + len(temp1))
                 #temp += (i // 100) << len(temp)
                 conn[index].send(temr)
+                #time.sleep(0.1)
                 # print("send ", msg, " client ")
                 flag = 0
                 tt_time = time.time()
@@ -83,17 +84,19 @@ def send_to_client1(msg, index):
                             flag = 1
                             break
                     except Exception as e:
-                        if (time.time() - tt_time > 5):
+                        #flag = 0
+                        #break
+                        if (time.time() - tt_time > 0.1):
                             flag = 0
-                            print(e, " get accept from client ", index)
+                            #print(e, " get accept from client ", index)
                             break
                 if (flag == 1):
-                    i+=100
+                    i+=1000
                     break
                 else:
                     continue
             except Exception as e:
-                print(e)
+                #print(e)
                 if (time.time() - t_time > 60):
                     print(e, " send picture to client ", index)
                     return "*"
