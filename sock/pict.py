@@ -1,6 +1,6 @@
 ﻿import sys, time, math,random
 import socket
-def get_list_byte(sock, i):
+def get_list_byte(sock, i): #получает часть картинки читая заголовок а потом основную часть таймаут 420
     msg = ""
     t_time = time.time()
     while True:
@@ -26,7 +26,7 @@ def get_list_byte(sock, i):
                 continue
             #data = data[20 : siz]
         except Exception as e:
-            if (time.time() - t_time > 120):
+            if (time.time() - t_time > 420):
                 print(e)
                 return "*"
             #print(e)
@@ -40,7 +40,7 @@ def get_list_byte(sock, i):
             break
     return msg
 
-def get_pic(file_name,sock):
+def get_pic(file_name,sock): #читает длину, получает  получает часть картинки от get_list_byte и пишет  в файл таймуат 420
     #time.sleep(5)
     flag = 0
     temp = get_list_byte(sock, 0)
@@ -56,7 +56,7 @@ def get_pic(file_name,sock):
             sock.send(("134").encode())
             break
         except Exception as e:
-            if (time.time() - t_time > 120):
+            if (time.time() - t_time > 420):
                 print(e)
                 return "*"
     data = ""
@@ -84,7 +84,7 @@ def get_pic(file_name,sock):
                 sock.send(("134").encode())
                 break
             except Exception as e:
-                if (time.time() - t_time > 120):
+                if (time.time() - t_time > 420):
                     print(e)
                     stdout.close()
                     return "*"

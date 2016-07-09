@@ -5,29 +5,29 @@ from check_field import *
 from contacts_sock import *
 from drawing import *
 
-def get_null_string(gg):
+def get_null_string(gg): #дописывает 0 в начало строки до длины 10
     k = 10 - len(gg)
     hh = '0' * k
     ss = hh + gg
     return ss
 
 
-def get_pref(index, length):
+def get_pref(index, length): #создает заголовок пакета позиция + длина
     temp0 = get_null_string(str(index))
     temp2 = get_null_string(str(length))
     ans0 = temp0 + temp2
     ans1 = ans0.encode('utf-8')
     return ans1
 
-def send_to_client1(msg, index):
+def send_to_client1(msg, index): #отправляет большое сообщение msg сначала размер потом по частям содержание
     t_time = time.time()
     while 1:
         try:
             #print("send")
             temp = str(len(msg)).encode()
-            print(temp)
+            #print(temp)
             temp = get_pref(0, len(temp) + 20) + temp
-            print(temp)
+            #print(temp)
             conn[index].send(temp)
             break
         except Exception as e:
@@ -42,7 +42,7 @@ def send_to_client1(msg, index):
             #print("get")
             data = conn[index].recv(10000)
             ttmp = data.decode('utf-8')
-            print(ttmp)
+            #print(ttmp)
             if ((len(ttmp) >= len("134")) and (ttmp[-len("134") : ] == "134")):
                 break
         except Exception as e:
@@ -101,7 +101,7 @@ def send_to_client1(msg, index):
                     print(e, " send picture to client ", index)
                     return "*"
             
-def send_pic(file_name, index):
+def send_pic(file_name, index): #отправляет картинку
     sin=open(file_name,'rb')###
     send = sin.read()
     if (send_to_client1(send, index) == "*"):
