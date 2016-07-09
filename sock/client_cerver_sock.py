@@ -14,8 +14,8 @@ except:
     print('Фронтенд отключен, так как у вас нет PIL')
     py_flag = 0
 killed=0
-last_message=time.time()
 
+sock = socket.socket()
 mimo = ['Прoмаx','Прoмах','Прoмax','Прoмaх','Промаx','Промах','Промax','Промaх','Пpoмаx','Пpoмах','Пpoмax','Пpoмaх','Пpомаx',
         'Пpомах','Пpомax','Пpомaх']
 ranen = ['Paнeниe','Paнeние','Paнениe','Paнение','Pанeниe','Pанeние',
@@ -24,7 +24,7 @@ ranen = ['Paнeниe','Paнeние','Paнениe','Paнение','Pанeниe','
 ubit = ['Убит','убит','Убил','убил']
 used = ['Вы уже стреляли сюда', 'Bы уже стреляли сюда', 'Вы ужe стреляли сюда', 'Вы уже cтреляли сюда',
         'Вы уже стрeляли сюда', 'Вы уже стреляли cюда', 'Вы уже стреляли сюдa']
-sock = socket.socket()
+
 gin=open('server_IP.txt','r')###
 server_ip = gin.read()
 gin.close()
@@ -37,14 +37,14 @@ sin=open('port.txt','r')###
 portc = int(sin.read())
 sin.close()
 
-print("server IP = '" + server_ip + "'")
-sock.connect((server_ip, portc))
-sock.setblocking(0)
+
 #sock.connect(('178.70.195.156', 13451))
 #sock.connect(('192.168.0.64', 13451))
 
-print("connect")
+last_message = 0
 firstmsg = [0]
+endgame = [0]
+
 def send_to_server(msg):
     tttime = time.time()
     timeer = time.time()
@@ -93,8 +93,6 @@ def message_get():
             break
     return msg
 
-send_to_server(name)
-message_get()
 
 
 #отправляет запрос по координатам x y
@@ -118,8 +116,10 @@ def get_coordinate():
     msg=message_get()
     return [int(msg[1:]), letter.index(msg[0])+1]
             
-# принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, иначе - ошибка)
+# принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, Вы уже сюда стреляли - 3, Конец игры - 4, иначе - ошибка)
 def get_answer(a,b):
+    if (endgame[0] == 1):
+        return -1
     send_message(a,b)
     while True:
         msg=message_get()
@@ -135,26 +135,32 @@ def get_answer(a,b):
             return 3
         elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
             print("Победа")
+            unique_add = str(random.randint(0, 10 ** 9))
+            get_pic('result' + unique_add + '.jpg', sock)
             if py_flag:
-                unique_add = str(random.randint(0, 10 ** 9))
-                get_pic('result' + unique_add + '.jpg',sock)
                 res =  Image.open('result' + unique_add + '.jpg')
                 res.show()
                 res.close()
-            acc = input()
-            sys.exit(0)
+            endgame[0] = 1
+            return 4
+            #acc = input()
+            #sys.exit(0)
         elif msg == 'Поражение' or msg =='Победа':
             print(msg)
+            unique_add = str(random.randint(0, 10 ** 9))
+            get_pic('result' + unique_add + '.jpg', sock)
             if py_flag:
-                unique_add = str(random.randint(0, 10 ** 9))
-                get_pic('result' + unique_add + '.jpg',sock)
                 res =  Image.open('result' + unique_add + '.jpg')
                 res.show()
                 res.close()
-            acc = input()
-            sys.exit(0)
+            endgame[0] = 1
+            return 4
+            #acc = input()
+            #sys.exit(0)
 
 def get_result(a, b):
+    if (endgame[0] == 1):
+        return -1
     send_message(a, b)
     while True:
         msg = message_get()
@@ -169,18 +175,20 @@ def get_result(a, b):
         elif msg in used:
             return "Вы уже стреляли сюда"
         elif msg == 'Поражение' or msg == 'Победа':
+            unique_add = str(random.randint(0, 10 ** 9))
+            get_pic('result' + unique_add + '.jpg', sock)
             if py_flag:
-                get_pic('result.jpg',sock)
-                res =  Image.open('result.jpg')
                 res.show()
                 res.close()
+            endgame[0] = 1
             return (msg)
         elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
+            unique_add = str(random.randint(0, 10 ** 9))
+            get_pic('result' + unique_add + '.jpg', sock)
             if py_flag:
-                get_pic('result.jpg',sock)
-                res =  Image.open('result.jpg')
                 res.show()
                 res.close()
+            endgame[0] = 1
             return ("Победа")
 
 # проверяет, не закончилась ли игра
@@ -305,6 +313,7 @@ def send_field():
             return
 
 # процесс игры
+
 def init():
     # кто ходит первым
     #message_get()
@@ -312,9 +321,28 @@ def init():
     #print('turn =',turn)
     #my_field = make_field()
     send_field()
-init()
 
-from pict import *
+
+def connect_to_server():
+    global sock
+    sock = socket.socket()
+    global last_message
+    global server_ip
+    global portc
+    global name
+    last_message=time.time()
+    print("server IP = '" + server_ip + "'")
+    sock.connect((server_ip, portc))
+    sock.setblocking(0)
+    print("connect")
+    firstmsg[0] = 0
+    send_to_server(name)
+    message_get()
+    endgame[0] = 0
+    init()
+
+#connect_to_server()
+#from pict import *
 #функция игры
 #используйте get_answer(a,b): по координатам a b [1 10] возвращает результат выстрела
 
