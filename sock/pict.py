@@ -26,7 +26,7 @@ def get_list_byte(sock, i):
                 continue
             #data = data[20 : siz]
         except Exception as e:
-            if (time.time() - t_time > 60):
+            if (time.time() - t_time > 120):
                 print(e)
                 return "*"
             #print(e)
@@ -56,7 +56,7 @@ def get_pic(file_name,sock):
             sock.send(("134").encode())
             break
         except Exception as e:
-            if (time.time() - t_time > 60):
+            if (time.time() - t_time > 120):
                 print(e)
                 return "*"
     data = ""
@@ -71,6 +71,9 @@ def get_pic(file_name,sock):
             if (iter > 100000):
                 stdout.close()
                 return "*"
+            if (data == "*"):
+                stdout.close()
+                return "*"
             iter += 1
         i += 1
         stdout.write(data)
@@ -81,7 +84,7 @@ def get_pic(file_name,sock):
                 sock.send(("134").encode())
                 break
             except Exception as e:
-                if (time.time() - t_time > 60):
+                if (time.time() - t_time > 120):
                     print(e)
                     stdout.close()
                     return "*"
