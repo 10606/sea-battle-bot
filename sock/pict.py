@@ -1,30 +1,38 @@
 ﻿import sys, time, math,random
 import socket
+
+def send_accept(sock): #отправляет подтвердение серверу что получен пакет
+    t_time = time.time()
+    while 1:
+        try:
+            sock.send(("134").encode())
+            break
+        except Exception as e:
+            if (time.time() - t_time > 420):
+                print(e)
+                return "*"
+
 def get_list_byte(sock, i): #получает часть картинки читая заголовок а потом основную часть таймаут 420
     msg = ""
     t_time = time.time()
     while True:
         try:
             data = sock.recv(20)
-            #print("empty: ", data)
             if (len(data) < 20):
                 continue
-            #print("get ", data, len(data))
             pos1 = data[0:10]
-            #print(pos1)
             pos0 = (pos1).decode('utf-8')
-            #print(pos0)
             pos = int(pos0)
             siz1 = data[10:20]
-            # print(siz1)
             siz0 = (siz1).decode('utf-8')
-            #print(siz0)
             siz = int(siz0)
-            #print(pos, len(data))
             data = sock.recv(siz)
+            print(pos)
+            if (time.time() - t_time > 20):
+                if (send_accept(sock) == "*"):
+                    return "*"
             if (len(data) + 20 < siz or pos != i):
                 continue
-            #data = data[20 : siz]
         except Exception as e:
             if (time.time() - t_time > 420):
                 print(e)
@@ -39,6 +47,8 @@ def get_list_byte(sock, i): #получает часть картинки чит
         if (len(msg) > 0):
             break
     return msg
+
+
 
 def get_pic(file_name,sock): #читает длину, получает  получает часть картинки от get_list_byte и пишет  в файл таймуат 420
     #time.sleep(5)
@@ -78,16 +88,9 @@ def get_pic(file_name,sock): #читает длину, получает  пол�
         i += 1
         stdout.write(data)
         dwreadbuf += len(data)
-        t_time = time.time()
-        while 1:
-            try:
-                sock.send(("134").encode())
-                break
-            except Exception as e:
-                if (time.time() - t_time > 420):
-                    print(e)
-                    stdout.close()
-                    return "*"
+        if (send_accept(sock) == "*"):
+            stdout.close()
+            return "*"
     stdout.close()
     if flag:
         print(time.time())
