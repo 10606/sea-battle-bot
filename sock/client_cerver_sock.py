@@ -122,7 +122,7 @@ def get_coordinate():
 # принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, Вы уже сюда стреляли - 3, Конец игры - 4, иначе - ошибка)
 def get_answer(a,b):
     if (endgame[0] == 1):
-        return -1
+        return 4
     if (send_message(a,b) == "*"):
         endgame[0] = 1
         return 4
@@ -142,7 +142,7 @@ def get_answer(a,b):
         elif msg in used:
             return 3
         elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
-            print("Победа!")
+            print("Победа")
             unique_add = str(random.randint(0, 10 ** 9))
             get_pic('result' + unique_add + '.jpg', sock)
             if py_flag:
@@ -166,9 +166,10 @@ def get_answer(a,b):
             #acc = input()
             #sys.exit(0)
 
+#тоже что и get_answer только без перевода форматов 
 def get_result(req):
     if (endgame[0] == 1):
-        return -1
+        return "Игра уже завершена"
     if (send_to_server(req) == "*"):
         endgame[0] = 1
         return ("Сервер не отвечает")
