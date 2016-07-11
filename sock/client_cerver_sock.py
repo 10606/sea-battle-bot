@@ -119,18 +119,18 @@ def get_coordinate():
     msg=message_get()
     return [int(msg[1:]), letter.index(msg[0])+1]
             
-# принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, Вы уже сюда стреляли - 3, Конец игры - 4, иначе - ошибка)
+# принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, Вы уже сюда стреляли - 3, Конец игры - 4, Победа - 5, Поражение - 6, Сервер не отвечает - 7  иначе - ошибка)
 def get_answer(a,b):
     if (endgame[0] == 1):
         return 4
     if (send_message(a,b) == "*"):
         endgame[0] = 1
-        return 4
+        return 7
     while True:
         msg=message_get()
         if (msg == "*"):
             endgame[0] = 1
-            return 4
+            return 7
         firstmsg[0] = 1
         #print("get (" + msg + ") from server")
         if msg in mimo:
@@ -150,7 +150,7 @@ def get_answer(a,b):
                 res.show()
                 res.close()
             endgame[0] = 1
-            return 4
+            return 5
             #acc = input()
             #sys.exit(0)
         elif msg == 'Поражение' or msg =='Победа':
@@ -162,7 +162,10 @@ def get_answer(a,b):
                 res.show()
                 res.close()
             endgame[0] = 1
-            return 4
+            if (msg == "Победа"):
+                return 5
+            if (msg == "Поражение"):
+                return 6
             #acc = input()
             #sys.exit(0)
 
