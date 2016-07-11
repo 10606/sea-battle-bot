@@ -1,7 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 #версия для игры с сервером
 #get_answer(a,b): по координатам a b [1 10] возвращает результат выстрела
-#вызвать init()
+#вызвать connect_to_server()
 import sys, time, math,random
 import socket
 from check_okrest import *
@@ -166,7 +166,7 @@ def get_answer(a,b):
             #acc = input()
             #sys.exit(0)
 
-#тоже что и get_answer только без перевода форматов 
+#тоже что и get_answer только без перевода форматов
 def get_result(req):
     if (endgame[0] == 1):
         return "Игра уже завершена"
@@ -351,8 +351,12 @@ def connect_to_server():
     global name
     last_message=time.time()
     print("server IP = '" + server_ip + "'")
-    sock.connect((server_ip, portc))
-    sock.setblocking(0)
+    try:
+        sock.connect((server_ip, portc))
+        sock.setblocking(0)
+    except Exception as e:
+        print(e, "не удалось подключиться к серверу")
+        return "*"
     print("connect")
     firstmsg[0] = 0
     if (send_to_server(name) == "*"):
