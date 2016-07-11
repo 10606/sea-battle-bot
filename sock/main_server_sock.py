@@ -327,6 +327,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[0] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw2, to_draw1, iindex)
+                    print('ready send picture to client2 ', iindex + 1)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 1)
+                    print('send picture to client2 ', iindex + 1)
+
                     return
                 #print('get_coordinate')
                 temp_coord = get_coordinate(temp1)
@@ -342,6 +348,12 @@ def main ():
                         stdout.write(name[0] + "  :  " + name[1] + "\n")
                         stdout.write(name[0] + "  disconnect" + "\n" + "\n")
                         stdout.close()
+
+                        draw(to_draw2, to_draw1, iindex)
+                        print('ready send picture to client2 ', iindex + 1)
+                        send_pic('ready' + str(iindex) + '.jpg', iindex + 1)
+                        print('send picture to client2 ', iindex + 1)
+
                         return
             ans = check_request(field2, temp_coord[0] - 1, temp_coord[1] - 1)
             number=(temp_coord[0]-1)*10 + temp_coord[1] - 1
@@ -357,6 +369,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[0] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw2, to_draw1, iindex)
+                    print('ready send picture to client2 ', iindex + 1)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 1)
+                    print('send picture to client2 ', iindex + 1)
+
                     return
 
                 player_queue = 2
@@ -370,6 +388,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[0] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw2, to_draw1, iindex)
+                    print('ready send picture to client2 ', iindex + 1)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 1)
+                    print('send picture to client2 ', iindex + 1)
+
                     return
 
             elif (ans == 2):
@@ -383,6 +407,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[0] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw2, to_draw1, iindex)
+                    print('ready send picture to client2 ', iindex + 1)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 1)
+                    print('send picture to client2 ', iindex + 1)
+
                     return
 
                 ship2 -= 1
@@ -399,6 +429,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[1] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw1, to_draw2, iindex)
+                    print('ready send picture to client2 ', iindex)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 0)
+                    print('send picture to client2 ', iindex)
+
                     return
                 #print('get_coordinate')
                 temp_coord = get_coordinate(temp2)
@@ -414,6 +450,12 @@ def main ():
                         stdout.write(name[0] + "  :  " + name[1] + "\n")
                         stdout.write(name[1] + "  disconnect" + "\n" + "\n")
                         stdout.close()
+
+                        draw(to_draw1, to_draw2, iindex)
+                        print('ready send picture to client2 ', iindex)
+                        send_pic('ready' + str(iindex) + '.jpg', iindex + 0)
+                        print('send picture to client2 ', iindex)
+
                         return
             ans = check_request(field1, temp_coord[0] - 1, temp_coord[1] - 1)
             number=(temp_coord[0]-1)*10 + temp_coord[1] - 1
@@ -429,6 +471,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[1] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw1, to_draw2, iindex)
+                    print('ready send picture to client2 ', iindex)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 0)
+                    print('send picture to client2 ', iindex)
+
                     return
 
                 player_queue = 1
@@ -442,6 +490,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[1] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw1, to_draw2, iindex)
+                    print('ready send picture to client2 ', iindex)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 0)
+                    print('send picture to client2 ', iindex)
+
                     return
 
             elif (ans == 2):
@@ -455,6 +509,12 @@ def main ():
                     stdout.write(name[0] + "  :  " + name[1] + "\n")
                     stdout.write(name[1] + "  disconnect" + "\n" + "\n")
                     stdout.close()
+
+                    draw(to_draw1, to_draw2, iindex)
+                    print('ready send picture to client2 ', iindex)
+                    send_pic('ready' + str(iindex) + '.jpg', iindex + 0)
+                    print('send picture to client2 ', iindex)
+
                     return
                 ship1 -= 1
         iter_ += 1

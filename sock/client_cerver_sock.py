@@ -54,8 +54,9 @@ def send_to_server(msg):
         # print('я тута')
         if (time.time() - tttime > 6 * 60 and firstmsg[0]):
             print("server not ask")
-            acc = input()
-            sys.exit(0)
+            #acc = input()
+            #sys.exit(0)
+            return "*"
         try:
             sock.send(msg.encode())
             break
@@ -82,8 +83,9 @@ def message_get():
                 print(e, ctr)
             if (last_message - time.time() < -6*60 and firstmsg[0]):
                 print("time out")
-                accept = input()
-                sys.exit(0)
+                #accept = input()
+                #sys.exit(0)
+                return "*"
             continue
         if not data:
             break
@@ -102,7 +104,8 @@ def send_message(x,y):
     while 1:
         ctr+=1
         try:
-            send_to_server(letter[y - 1] + str(x))
+            if (send_to_server(letter[y - 1] + str(x)) == "*"):
+                return "*"
             print(letter[y-1]+str(x))
             break
         except Exception as e:
@@ -120,9 +123,14 @@ def get_coordinate():
 def get_answer(a,b):
     if (endgame[0] == 1):
         return -1
-    send_message(a,b)
+    if (send_message(a,b) == "*"):
+        endgame[0] = 1
+        return 4
     while True:
         msg=message_get()
+        if (msg == "*"):
+            endgame[0] = 1
+            return 4
         firstmsg[0] = 1
         #print("get (" + msg + ") from server")
         if msg in mimo:
@@ -134,7 +142,7 @@ def get_answer(a,b):
         elif msg in used:
             return 3
         elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
-            print("Победа")
+            print("Победа!")
             unique_add = str(random.randint(0, 10 ** 9))
             get_pic('result' + unique_add + '.jpg', sock)
             if py_flag:
@@ -158,12 +166,17 @@ def get_answer(a,b):
             #acc = input()
             #sys.exit(0)
 
-def get_result(a, b):
+def get_result(req):
     if (endgame[0] == 1):
         return -1
-    send_message(a, b)
+    if (send_to_server(req) == "*"):
+        endgame[0] = 1
+        return ("Сервер не отвечает")
     while True:
         msg = message_get()
+        if (msg == "*"):
+            endgame[0] = 1
+            return ("Сервер не отвечает")
         firstmsg[0] = 1
         #print("get (" + msg + ") from server")
         if msg in mimo:
@@ -298,7 +311,8 @@ def send_field_to_server(field):
         msg += "\n"
     while True:
         try:
-            send_to_server(msg)
+            if (send_to_server(msg) == "*"):
+                return "*"
             break
         except Exception as e:
             print(e)
@@ -307,8 +321,11 @@ def send_field():
     while (1):
         temp_field = make_field()
         print("send_field")
-        send_field_to_server(temp_field)
+        if (send_field_to_server(temp_field) == "*"):
+            return "*"
         temp = str(message_get())
+        if (temp == "*"):
+            return "*"
         if temp == "1":
             return
 
@@ -320,7 +337,8 @@ def init():
     #turn = start()
     #print('turn =',turn)
     #my_field = make_field()
-    send_field()
+    if (send_field() == "*"):
+        return "*"
 
 
 def connect_to_server():
@@ -336,10 +354,13 @@ def connect_to_server():
     sock.setblocking(0)
     print("connect")
     firstmsg[0] = 0
-    send_to_server(name)
-    message_get()
+    if (send_to_server(name) == "*"):
+        return "*"
+    if (message_get() == "*"):
+        return "*"
     endgame[0] = 0
-    init()
+    if (init() == "*"):
+        return "*"
 
 #connect_to_server()
 #from pict import *
