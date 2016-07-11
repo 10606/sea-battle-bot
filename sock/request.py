@@ -1,15 +1,4 @@
 ﻿# -*- coding: utf-8 -*-
-temp = [[0]*10 for x in range(10)]
-temp[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-temp[1] = [0, 1, 1, 1, 1, 0, 1, 0, 0, 0]
-temp[2] = [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]
-temp[3] = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
-temp[4] = [0, 0, 1, 0, 0, 0, 0, 0, 1, 0]
-temp[5] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
-temp[6] = [0, 0, 0, 0, 1, 1, 1, 0, 0, 0]
-temp[7] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
-temp[8] = [0, 0, 0, 0, 1, 0, 1, 0, 0, 0]
-temp[9] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 #0 - мимо
 #1 - ранил
@@ -45,11 +34,4 @@ def check_request(field, x, y):
                 flag = 1
             i -= 1
     return flag
-'''
-print(check_request(temp, 1, 2))
-print(check_request(temp, 1, 1))
-print(check_request(temp, 1, 3))
-print(check_request(temp, 1, 4))
-print(check_request(temp, 1, 5))
-print(check_request(temp, 0, 9))
-'''
+

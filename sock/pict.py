@@ -27,8 +27,7 @@ def get_list_byte(sock, i): #получает часть картинки чит
             siz0 = (siz1).decode('utf-8')
             siz = int(siz0)
             data = sock.recv(siz)
-            print(pos)
-            if (time.time() - t_time > 20):
+            if (time.time() - t_time > 10):
                 if (send_accept(sock) == "*"):
                     return "*"
             if (len(data) + 20 < siz or pos != i):
@@ -37,13 +36,10 @@ def get_list_byte(sock, i): #получает часть картинки чит
             if (time.time() - t_time > 420):
                 print(e)
                 return "*"
-            #print(e)
             continue
         if not data:
             break
-        #print(data)
-        msg = data#.decode('utf-8')
-        #print(msg)
+        msg = data
         if (len(msg) > 0):
             break
     return msg
@@ -51,13 +47,11 @@ def get_list_byte(sock, i): #получает часть картинки чит
 
 
 def get_pic(file_name,sock): #читает длину, получает  получает часть картинки от get_list_byte и пишет  в файл таймуат 420
-    #time.sleep(5)
     flag = 0
     temp = get_list_byte(sock, 0)
     if (temp == "*"):
         return "*"
     size = int(temp)
-    #print(size)
     if flag:
         print(time.time())
     t_time = time.time()
@@ -95,5 +89,3 @@ def get_pic(file_name,sock): #читает длину, получает  пол�
     if flag:
         print(time.time())
 
-#get_pic("get.bmp")
-#s = input()

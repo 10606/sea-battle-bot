@@ -8,7 +8,6 @@ import sys, time, math, random
 import socket
 
 sock = socket.socket()
-#sock = socket()
 
 sin=open('port.txt','r')###
 portc = int(sin.read())
@@ -39,7 +38,6 @@ def send_to_client(index, msg):
             print("player ", index, " not ask")
             return "*"
         ctr += 1
-        # print('я тута')
         try:
             conn[index].send(msg.encode())
             print("send ", msg, " client ", index)
@@ -54,13 +52,10 @@ def send_answer_sock(index, msg): #отправка ответа
     return send_to_client(index, msg)
 
 def check_format_field(msg): #проверка что это поле по формату
-    #print('enter the function')
     count = 100;
     for i in range (len(msg)):
-        #print(msg)
         if (msg[i] == '1' or msg[i] == '0'):
             count -= 1
-    #print(count)
     return (count == 0)
 
 def check_format_request(message):
@@ -88,12 +83,10 @@ def get_from_client(index):
         try:
             data = conn[index].recv(10000)
         except Exception as e:
-            #time.sleep(1)
             if (time.time() - time_t > 60):
                 time_t = time.time()
                 print(e, ctr, " get", index)
             if (firstmsgbot[index] == 0 and time.time() - timemsgbot[index] > 5*60):
-                #send_answer_sock(index, "Поражение")
                 return ("*")
             continue
         if not data:
@@ -108,7 +101,6 @@ def get_request_sock(index): #получение запроса от index 0 и�
     while (1):
         msg = get_from_client(index)
         if (time.time() - timemsgbot[index] > 5 * 60 and firstmsgbot[index] == 0):
-            #send_answer_sock(index, "Поражение")
             return "*"
         #если это первый запрос index это должно быть поле
         if (firstmsgbot[index] == 1):
@@ -123,4 +115,3 @@ def get_request_sock(index): #получение запроса от index 0 и�
             print("get ", msg, " client ", index)
             return msg #возвращаем результат запроса
 
-#print(get_request(id_bot1))

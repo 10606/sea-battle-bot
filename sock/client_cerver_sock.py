@@ -38,8 +38,6 @@ portc = int(sin.read())
 sin.close()
 
 
-#sock.connect(('178.70.195.156', 13451))
-#sock.connect(('192.168.0.64', 13451))
 
 last_message = 0
 firstmsg = [0]
@@ -51,11 +49,8 @@ def send_to_server(msg):
     ctr = 0
     while 1:
         ctr += 1
-        # print('я тута')
         if (time.time() - tttime > 6 * 60 and firstmsg[0]):
             print("server not ask")
-            #acc = input()
-            #sys.exit(0)
             return "*"
         try:
             sock.send(msg.encode())
@@ -77,14 +72,11 @@ def message_get():
         try:
             data = sock.recv(10000)
         except Exception as e:
-            #time.sleep(2)
             if (time.time() - time_t > 60):
                 time_t = time.time()
                 print(e, ctr)
             if (last_message - time.time() < -6*60 and firstmsg[0]):
                 print("time out")
-                #accept = input()
-                #sys.exit(0)
                 return "*"
             continue
         if not data:
@@ -109,15 +101,7 @@ def send_message(x,y):
             print(letter[y-1]+str(x))
             break
         except Exception as e:
-            #time.sleep(5)
             print(e, ctr)
-    #time.sleep(3)
-
-# принимаем сообщение соперника о его выстреле (строка вида <буква ABCDEFGHIJ><число 12345678910>, иначе - ошибка)
-def get_coordinate():
-    letter = 'ABCDEFGHIJ'
-    msg=message_get()
-    return [int(msg[1:]), letter.index(msg[0])+1]
             
 # принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, Вы уже сюда стреляли - 3, Конец игры - 4, Победа - 5, Поражение - 6, Сервер не отвечает - 7  иначе - ошибка)
 def get_answer(a,b):
@@ -132,7 +116,6 @@ def get_answer(a,b):
             endgame[0] = 1
             return 7
         firstmsg[0] = 1
-        #print("get (" + msg + ") from server")
         if msg in mimo:
             return -1
         elif msg in ranen:
@@ -151,8 +134,6 @@ def get_answer(a,b):
                 res.close()
             endgame[0] = 1
             return 5
-            #acc = input()
-            #sys.exit(0)
         elif msg == 'Поражение' or msg =='Победа':
             print(msg)
             unique_add = str(random.randint(0, 10 ** 9))
@@ -166,8 +147,6 @@ def get_answer(a,b):
                 return 5
             if (msg == "Поражение"):
                 return 6
-            #acc = input()
-            #sys.exit(0)
 
 #тоже что и get_answer только без перевода форматов
 def get_result(req):
@@ -182,7 +161,6 @@ def get_result(req):
             endgame[0] = 1
             return ("Сервер не отвечает")
         firstmsg[0] = 1
-        #print("get (" + msg + ") from server")
         if msg in mimo:
             return "Промах"
         elif msg in ranen:
@@ -208,13 +186,6 @@ def get_result(req):
             endgame[0] = 1
             return ("Победа")
 
-# проверяет, не закончилась ли игра
-def checker(field):
-    for i in range(1, 11):
-        for j in range(1, 11):
-            if field[i][j] > 0:
-                return 0
-    return 1
 # поиск всех возможных кораблей длины length на поле field
 def get_ships(length, field):
     ships = []
@@ -335,16 +306,6 @@ def send_field():
 
 # процесс игры
 
-def init():
-    # кто ходит первым
-    #message_get()
-    #turn = start()
-    #print('turn =',turn)
-    #my_field = make_field()
-    if (send_field() == "*"):
-        return "*"
-
-
 def connect_to_server():
     global sock
     sock = socket.socket()
@@ -367,7 +328,7 @@ def connect_to_server():
     if (message_get() == "*"):
         return "*"
     endgame[0] = 0
-    if (init() == "*"):
+    if (send_field() == "*"):
         return "*"
 
 #connect_to_server()
