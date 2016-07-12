@@ -1,0 +1,1234 @@
+﻿connected: ('95.54.6.143', 49301)
+connected: ('95.54.6.143', 49304)
+36
+send  здравствуйте, hh  client  36
+client 36: hh
+
+get field client  36
+1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 1 0 1
+1 1 0 0 0 0 0 1 0 1
+0 0 0 1 0 0 0 0 0 1
+1 1 0 0 0 0 0 0 0 0
+0 0 0 0 1 0 0 0 1 0
+0 0 0 0 0 0 0 0 1 0
+0 1 0 0 0 0 0 0 1 0
+0 0 0 0 0 0 0 0 0 0
+0 0 1 1 1 1 0 0 0 0
+
+send  1  client  36
+send  здравствуйте, hh  client  37
+client 37: hh
+
+get field client  37
+1 1 0 1 0 1 0 0 0 0
+0 0 0 0 0 1 0 0 1 0
+0 1 0 0 0 0 0 0 1 0
+0 0 0 1 1 1 1 0 1 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 1 0 0
+1 1 0 0 0 0 0 0 0 0
+0 0 0 1 0 0 0 0 0 0
+0 0 0 1 0 0 0 0 0 0
+0 0 0 1 0 0 0 1 0 0
+
+send  1  client  37
+get  A1  client  36
+send  Paнeние  client  36
+get  A1  client  36
+send  Вы ужe стреляли сюда  client  36
+get  B1  client  36
+send  убил  client  36
+get  B1  client  36
+send  Вы уже стрeляли сюда  client  36
+get  C1  client  36
+send  Промах  client  36
+get  A1  client  37
+send  Убил  client  37
+get  A1  client  37
+send  Вы уже стреляли сюда  client  37
+get  B1  client  37
+send  Пpoмаx  client  37
+get  C1  client  36
+send  Вы ужe стреляли сюда  client  36
+get  D1  client  36
+send  Убил  client  36
+get  D1  client  36
+send  Вы уже стрeляли сюда  client  36
+get  E1  client  36
+send  Пpомаx  client  36
+get  B1  client  37
+send  Вы уже стреляли сюдa  client  37
+get  C1  client  37
+send  Пpомax  client  37
+get  E1  client  36
+send  Bы уже стреляли сюда  client  36
+get  F1  client  36
+send  Paнeниe  client  36
+get  F1  client  36
+send  Вы уже cтреляли сюда  client  36
+get  G1  client  36
+send  Прoмax  client  36
+get  C1  client  37
+send  Вы уже стреляли cюда  client  37
+get  D1  client  37
+send  Промаx  client  37
+get  G1  client  36
+send  Вы уже стреляли сюда  client  36
+get  H1  client  36
+send  Промax  client  36
+get  D1  client  37
+send  Вы ужe стреляли сюда  client  37
+get  E1  client  37
+send  Пpoмаx  client  37
+get  H1  client  36
+send  Вы уже стрeляли сюда  client  36
+get  I1  client  36
+send  Пpoмax  client  36
+get  E1  client  37
+send  Вы уже стреляли сюдa  client  37
+get  F1  client  37
+send  Пpомаx  client  37
+get  I1  client  36
+send  Bы уже стреляли сюда  client  36
+get  J1  client  36
+send  Пpомax  client  36
+get  F1  client  37
+send  Вы уже cтреляли сюда  client  37
+get  G1  client  37
+send  Прoмаx  client  37
+get  J1  client  36
+send  Вы уже стреляли cюда  client  36
+get  A2  client  36
+send  Прoмax  client  36
+get  G1  client  37
+send  Вы уже стреляли сюда  client  37
+get  H1  client  37
+send  Промаx  client  37
+get  A2  client  36
+send  Вы ужe стреляли сюда  client  36
+get  B2  client  36
+send  Промax  client  36
+get  H1  client  37
+send  Вы уже стрeляли сюда  client  37
+get  I1  client  37
+send  Пpoмаx  client  37
+get  B2  client  36
+send  Вы уже стреляли сюдa  client  36
+get  C2  client  36
+send  Пpoмax  client  36
+get  I1  client  37
+send  Bы уже стреляли сюда  client  37
+get  J1  client  37
+send  Пpомаx  client  37
+get  C2  client  36
+send  Вы уже cтреляли сюда  client  36
+get  D2  client  36
+send  Пpомax  client  36
+get  J1  client  37
+send  Вы уже стреляли cюда  client  37
+get  A2  client  37
+send  Прoмаx  client  37
+get  D2  client  36
+send  Вы уже стреляли сюда  client  36
+get  E2  client  36
+send  Прoмax  client  36
+get  A2  client  37
+send  Вы ужe стреляли сюда  client  37
+get  B2  client  37
+send  Промаx  client  37
+get  E2  client  36
+send  Вы уже стрeляли сюда  client  36
+get  F2  client  36
+send  Убил  client  36
+get  F2  client  36
+send  Вы уже стреляли сюдa  client  36
+get  G2  client  36
+send  Пpoмаx  client  36
+get  B2  client  37
+send  Bы уже стреляли сюда  client  37
+get  C2  client  37
+send  Пpoмax  client  37
+get  G2  client  36
+send  Вы уже cтреляли сюда  client  36
+get  H2  client  36
+send  Пpомаx  client  36
+get  C2  client  37
+send  Вы уже стреляли cюда  client  37
+get  D2  client  37
+send  Пpомax  client  37
+get  H2  client  36
+send  Вы уже стреляли сюда  client  36
+get  I2  client  36
+send  Paнeниe  client  36
+get  I2  client  36
+send  Вы ужe стреляли сюда  client  36
+get  J2  client  36
+send  Прoмax  client  36
+get  D2  client  37
+send  Вы уже стрeляли сюда  client  37
+get  E2  client  37
+send  Промаx  client  37
+get  J2  client  36
+send  Вы уже стреляли сюдa  client  36
+get  A3  client  36
+send  Промax  client  36
+get  E2  client  37
+send  Bы уже стреляли сюда  client  37
+get  F2  client  37
+send  Пpoмаx  client  37
+get  A3  client  36
+send  Вы уже cтреляли сюда  client  36
+get  B3  client  36
+send  Убил  client  36
+get  B3  client  36
+send  Вы уже стреляли cюда  client  36
+get  C3  client  36
+send  Пpомаx  client  36
+get  F2  client  37
+send  Вы уже стреляли сюда  client  37
+get  G2  client  37
+send  Пpомax  client  37
+get  C3  client  36
+send  Вы ужe стреляли сюда  client  36
+get  D3  client  36
+send  Прoмаx  client  36
+get  G2  client  37
+send  Вы уже стрeляли сюда  client  37
+get  H2  client  37
+send  Paнениe  client  37
+get  H2  client  37
+send  Вы уже стреляли сюдa  client  37
+get  I2  client  37
+send  Промаx  client  37
+get  D3  client  36
+send  Bы уже стреляли сюда  client  36
+get  E3  client  36
+send  Промax  client  36
+get  I2  client  37
+send  Вы уже cтреляли сюда  client  37
+get  J2  client  37
+send  Рaнeниe  client  37
+get  J2  client  37
+send  Вы уже стреляли cюда  client  37
+get  A3  client  37
+send  Рaнениe  client  37
+get  A3  client  37
+send  Вы уже стреляли сюда  client  37
+get  B3  client  37
+send  Убит  client  37
+get  B3  client  37
+send  Вы ужe стреляли сюда  client  37
+get  C3  client  37
+send  Пpомax  client  37
+get  E3  client  36
+send  Вы уже стрeляли сюда  client  36
+get  F3  client  36
+send  Прoмаx  client  36
+get  C3  client  37
+send  Вы уже стреляли сюдa  client  37
+get  D3  client  37
+send  Прoмax  client  37
+get  F3  client  36
+send  Bы уже стреляли сюда  client  36
+get  G3  client  36
+send  Промаx  client  36
+get  D3  client  37
+send  Вы уже cтреляли сюда  client  37
+get  E3  client  37
+send  Промax  client  37
+get  G3  client  36
+send  Вы уже стреляли cюда  client  36
+get  H3  client  36
+send  Пpoмаx  client  36
+get  E3  client  37
+send  Вы уже стреляли сюда  client  37
+get  F3  client  37
+send  Пpoмax  client  37
+get  H3  client  36
+send  Вы ужe стреляли сюда  client  36
+get  I3  client  36
+send  Ранeниe  client  36
+get  I3  client  36
+send  Вы уже стрeляли сюда  client  36
+get  J3  client  36
+send  Пpомax  client  36
+get  F3  client  37
+send  Вы уже стреляли сюдa  client  37
+get  G3  client  37
+send  Прoмаx  client  37
+get  J3  client  36
+send  Bы уже стреляли сюда  client  36
+get  A4  client  36
+send  Прoмax  client  36
+get  G3  client  37
+send  Вы уже cтреляли сюда  client  37
+get  H3  client  37
+send  Убит  client  37
+get  H3  client  37
+send  Вы уже стреляли cюда  client  37
+get  I3  client  37
+send  Промax  client  37
+get  A4  client  36
+send  Вы уже стреляли сюда  client  36
+get  B4  client  36
+send  Пpoмаx  client  36
+get  I3  client  37
+send  Вы ужe стреляли сюда  client  37
+get  J3  client  37
+send  Рaнениe  client  37
+get  J3  client  37
+send  Вы уже стрeляли сюда  client  37
+get  A4  client  37
+send  Пpомаx  client  37
+get  B4  client  36
+send  Вы уже стреляли сюдa  client  36
+get  C4  client  36
+send  Пpомax  client  36
+get  A4  client  37
+send  Bы уже стреляли сюда  client  37
+get  B4  client  37
+send  Прoмаx  client  37
+get  C4  client  36
+send  Вы уже cтреляли сюда  client  36
+get  D4  client  36
+send  Paнениe  client  36
+get  D4  client  36
+send  Вы уже стреляли cюда  client  36
+get  E4  client  36
+send  Pанeниe  client  36
+get  E4  client  36
+send  Вы уже стреляли сюда  client  36
+get  F4  client  36
+send  Pанениe  client  36
+get  F4  client  36
+send  Вы ужe стреляли сюда  client  36
+get  G4  client  36
+send  Убит  client  36
+get  G4  client  36
+send  Вы уже стрeляли сюда  client  36
+get  H4  client  36
+send  Пpoмax  client  36
+get  B4  client  37
+send  Вы уже стреляли сюдa  client  37
+get  C4  client  37
+send  Пpомаx  client  37
+get  H4  client  36
+send  Bы уже стреляли сюда  client  36
+get  I4  client  36
+send  Убил  client  36
+get  I4  client  36
+send  Вы уже cтреляли сюда  client  36
+get  J4  client  36
+send  Прoмаx  client  36
+get  C4  client  37
+send  Вы уже стреляли cюда  client  37
+get  D4  client  37
+send  Убил  client  37
+get  D4  client  37
+send  Вы уже стреляли сюда  client  37
+get  E4  client  37
+send  Промаx  client  37
+get  J4  client  36
+send  Вы ужe стреляли сюда  client  36
+get  A5  client  36
+send  Промax  client  36
+get  E4  client  37
+send  Вы уже стрeляли сюда  client  37
+get  F4  client  37
+send  Пpoмаx  client  37
+get  A5  client  36
+send  Вы уже стреляли сюдa  client  36
+get  B5  client  36
+send  Пpoмax  client  36
+get  F4  client  37
+send  Bы уже стреляли сюда  client  37
+get  G4  client  37
+send  Пpомаx  client  37
+get  B5  client  36
+send  Вы уже cтреляли сюда  client  36
+get  C5  client  36
+send  Пpомax  client  36
+get  G4  client  37
+send  Вы уже стреляли cюда  client  37
+get  H4  client  37
+send  Прoмаx  client  37
+get  C5  client  36
+send  Вы уже стреляли сюда  client  36
+get  D5  client  36
+send  Прoмax  client  36
+get  H4  client  37
+send  Вы ужe стреляли сюда  client  37
+get  I4  client  37
+send  Промаx  client  37
+get  D5  client  36
+send  Вы уже стрeляли сюда  client  36
+get  E5  client  36
+send  Промax  client  36
+get  I4  client  37
+send  Вы уже стреляли сюдa  client  37
+get  J4  client  37
+send  Убит  client  37
+get  J4  client  37
+send  Bы уже стреляли сюда  client  37
+get  A5  client  37
+send  Рaнениe  client  37
+get  A5  client  37
+send  Вы уже cтреляли сюда  client  37
+get  B5  client  37
+send  Убит  client  37
+get  B5  client  37
+send  Вы уже стреляли cюда  client  37
+get  C5  client  37
+send  Пpомax  client  37
+get  E5  client  36
+send  Вы уже стреляли сюда  client  36
+get  F5  client  36
+send  Прoмаx  client  36
+get  C5  client  37
+send  Вы ужe стреляли сюда  client  37
+get  D5  client  37
+send  Прoмax  client  37
+get  F5  client  36
+send  Вы уже стрeляли сюда  client  36
+get  G5  client  36
+send  Промаx  client  36
+get  D5  client  37
+send  Вы уже стреляли сюдa  client  37
+get  E5  client  37
+send  Промax  client  37
+get  G5  client  36
+send  Bы уже стреляли сюда  client  36
+get  H5  client  36
+send  Пpoмаx  client  36
+get  E5  client  37
+send  Вы уже cтреляли сюда  client  37
+get  F5  client  37
+send  Пpoмax  client  37
+get  H5  client  36
+send  Вы уже стреляли cюда  client  36
+get  I5  client  36
+send  Пpомаx  client  36
+get  F5  client  37
+send  Вы уже стреляли сюда  client  37
+get  G5  client  37
+send  Пpомax  client  37
+get  I5  client  36
+send  Вы ужe стреляли сюда  client  36
+get  J5  client  36
+send  Прoмаx  client  36
+get  G5  client  37
+send  Вы уже стрeляли сюда  client  37
+get  H5  client  37
+send  Прoмax  client  37
+get  J5  client  36
+send  Вы уже стреляли сюдa  client  36
+get  A6  client  36
+send  Промаx  client  36
+get  H5  client  37
+send  Bы уже стреляли сюда  client  37
+get  I5  client  37
+send  Промax  client  37
+get  A6  client  36
+send  Вы уже cтреляли сюда  client  36
+get  B6  client  36
+send  Пpoмаx  client  36
+get  I5  client  37
+send  Вы уже стреляли cюда  client  37
+get  J5  client  37
+send  Пpoмax  client  37
+get  B6  client  36
+send  Вы уже стреляли сюда  client  36
+get  C6  client  36
+send  Пpомаx  client  36
+get  J5  client  37
+send  Вы ужe стреляли сюда  client  37
+get  A6  client  37
+send  Пpомax  client  37
+get  C6  client  36
+send  Вы уже стрeляли сюда  client  36
+get  D6  client  36
+send  Прoмаx  client  36
+get  A6  client  37
+send  Вы уже стреляли сюдa  client  37
+get  B6  client  37
+send  Прoмax  client  37
+get  D6  client  36
+send  Bы уже стреляли сюда  client  36
+get  E6  client  36
+send  Промаx  client  36
+get  B6  client  37
+send  Вы уже cтреляли сюда  client  37
+get  C6  client  37
+send  Промax  client  37
+get  E6  client  36
+send  Вы уже стреляли cюда  client  36
+get  F6  client  36
+send  Пpoмаx  client  36
+get  C6  client  37
+send  Вы уже стреляли сюда  client  37
+get  D6  client  37
+send  Пpoмax  client  37
+get  F6  client  36
+send  Вы ужe стреляли сюда  client  36
+get  G6  client  36
+send  Пpомаx  client  36
+get  D6  client  37
+send  Вы уже стрeляли сюда  client  37
+get  E6  client  37
+send  Убил  client  37
+get  E6  client  37
+send  Вы уже стреляли сюдa  client  37
+get  F6  client  37
+send  Прoмаx  client  37
+get  G6  client  36
+send  Bы уже стреляли сюда  client  36
+get  H6  client  36
+send  Убил  client  36
+get  H6  client  36
+send  Вы уже cтреляли сюда  client  36
+get  I6  client  36
+send  Промаx  client  36
+get  F6  client  37
+send  Вы уже стреляли cюда  client  37
+get  G6  client  37
+send  Промax  client  37
+get  I6  client  36
+send  Вы уже стреляли сюда  client  36
+get  J6  client  36
+send  Пpoмаx  client  36
+get  G6  client  37
+send  Вы ужe стреляли сюда  client  37
+get  H6  client  37
+send  Пpoмax  client  37
+get  J6  client  36
+send  Вы уже стрeляли сюда  client  36
+get  A7  client  36
+send  Ранeниe  client  36
+get  A7  client  36
+send  Вы уже стреляли сюдa  client  36
+get  B7  client  36
+send  Убил  client  36
+get  B7  client  36
+send  Bы уже стреляли сюда  client  36
+get  C7  client  36
+send  Прoмаx  client  36
+get  H6  client  37
+send  Вы уже cтреляли сюда  client  37
+get  I6  client  37
+send  Paнениe  client  37
+get  I6  client  37
+send  Вы уже стреляли cюда  client  37
+get  J6  client  37
+send  Промаx  client  37
+get  C7  client  36
+send  Вы уже стреляли сюда  client  36
+get  D7  client  36
+send  Промax  client  36
+get  J6  client  37
+send  Вы ужe стреляли сюда  client  37
+get  A7  client  37
+send  Пpoмаx  client  37
+get  D7  client  36
+send  Вы уже стрeляли сюда  client  36
+get  E7  client  36
+send  Пpoмax  client  36
+get  A7  client  37
+send  Вы уже стреляли сюдa  client  37
+get  B7  client  37
+send  Пpомаx  client  37
+get  E7  client  36
+send  Bы уже стреляли сюда  client  36
+get  F7  client  36
+send  Пpомax  client  36
+get  B7  client  37
+send  Вы уже cтреляли сюда  client  37
+get  C7  client  37
+send  Прoмаx  client  37
+get  F7  client  36
+send  Вы уже стреляли cюда  client  36
+get  G7  client  36
+send  Прoмax  client  36
+get  C7  client  37
+send  Вы уже стреляли сюда  client  37
+get  D7  client  37
+send  Промаx  client  37
+get  G7  client  36
+send  Вы ужe стреляли сюда  client  36
+get  H7  client  36
+send  Промax  client  36
+get  D7  client  37
+send  Вы уже стрeляли сюда  client  37
+get  E7  client  37
+send  Пpoмаx  client  37
+get  H7  client  36
+send  Вы уже стреляли сюдa  client  36
+get  I7  client  36
+send  Пpoмax  client  36
+get  E7  client  37
+send  Bы уже стреляли сюда  client  37
+get  F7  client  37
+send  Пpомаx  client  37
+get  I7  client  36
+send  Вы уже cтреляли сюда  client  36
+get  J7  client  36
+send  Пpомax  client  36
+get  F7  client  37
+send  Вы уже стреляли cюда  client  37
+get  G7  client  37
+send  Прoмаx  client  37
+get  J7  client  36
+send  Вы уже стреляли сюда  client  36
+get  A8  client  36
+send  Прoмax  client  36
+get  G7  client  37
+send  Вы ужe стреляли сюда  client  37
+get  H7  client  37
+send  Промаx  client  37
+get  A8  client  36
+send  Вы уже стрeляли сюда  client  36
+get  B8  client  36
+send  Промax  client  36
+get  H7  client  37
+send  Вы уже стреляли сюдa  client  37
+get  I7  client  37
+send  Рaнeниe  client  37
+get  I7  client  37
+send  Bы уже стреляли сюда  client  37
+get  J7  client  37
+send  Пpoмax  client  37
+get  B8  client  36
+send  Вы уже cтреляли сюда  client  36
+get  C8  client  36
+send  Пpомаx  client  36
+get  J7  client  37
+send  Вы уже стреляли cюда  client  37
+get  A8  client  37
+send  Пpомax  client  37
+get  C8  client  36
+send  Вы уже стреляли сюда  client  36
+get  D8  client  36
+send  Paнeниe  client  36
+get  D8  client  36
+send  Вы ужe стреляли сюда  client  36
+get  E8  client  36
+send  Прoмax  client  36
+get  A8  client  37
+send  Вы уже стрeляли сюда  client  37
+get  B8  client  37
+send  Убит  client  37
+get  B8  client  37
+send  Вы уже стреляли сюдa  client  37
+get  C8  client  37
+send  Промax  client  37
+get  E8  client  36
+send  Bы уже стреляли сюда  client  36
+get  F8  client  36
+send  Пpoмаx  client  36
+get  C8  client  37
+send  Вы уже cтреляли сюда  client  37
+get  D8  client  37
+send  Пpoмax  client  37
+get  F8  client  36
+send  Вы уже стреляли cюда  client  36
+get  G8  client  36
+send  Пpомаx  client  36
+get  D8  client  37
+send  Вы уже стреляли сюда  client  37
+get  E8  client  37
+send  Пpомax  client  37
+get  G8  client  36
+send  Вы ужe стреляли сюда  client  36
+get  H8  client  36
+send  Прoмаx  client  36
+get  E8  client  37
+send  Вы уже стрeляли сюда  client  37
+get  F8  client  37
+send  Прoмax  client  37
+get  H8  client  36
+send  Вы уже стреляли сюдa  client  36
+get  I8  client  36
+send  Промаx  client  36
+get  F8  client  37
+send  Bы уже стреляли сюда  client  37
+get  G8  client  37
+send  Промax  client  37
+get  I8  client  36
+send  Вы уже cтреляли сюда  client  36
+get  J8  client  36
+send  Пpoмаx  client  36
+get  G8  client  37
+send  Вы уже стреляли cюда  client  37
+get  H8  client  37
+send  Пpoмax  client  37
+get  J8  client  36
+send  Вы уже стреляли сюда  client  36
+get  A9  client  36
+send  Пpомаx  client  36
+get  H8  client  37
+send  Вы ужe стреляли сюда  client  37
+get  I8  client  37
+send  Убил  client  37
+get  I8  client  37
+send  Вы уже стрeляли сюда  client  37
+get  J8  client  37
+send  Прoмаx  client  37
+get  A9  client  36
+send  Вы уже стреляли сюдa  client  36
+get  B9  client  36
+send  Прoмax  client  36
+get  J8  client  37
+send  Bы уже стреляли сюда  client  37
+get  A9  client  37
+send  Промаx  client  37
+get  B9  client  36
+send  Вы уже cтреляли сюда  client  36
+get  C9  client  36
+send  Промax  client  36
+get  A9  client  37
+send  Вы уже стреляли cюда  client  37
+get  B9  client  37
+send  Пpoмаx  client  37
+get  C9  client  36
+send  Вы уже стреляли сюда  client  36
+get  D9  client  36
+send  Рaнениe  client  36
+get  D9  client  36
+send  Вы ужe стреляли сюда  client  36
+get  E9  client  36
+send  Пpомаx  client  36
+get  B9  client  37
+send  Вы уже стрeляли сюда  client  37
+get  C9  client  37
+send  Пpомax  client  37
+get  E9  client  36
+send  Вы уже стреляли сюдa  client  36
+get  F9  client  36
+send  Прoмаx  client  36
+get  C9  client  37
+send  Bы уже стреляли сюда  client  37
+get  D9  client  37
+send  Прoмax  client  37
+get  F9  client  36
+send  Вы уже cтреляли сюда  client  36
+get  G9  client  36
+send  Промаx  client  36
+get  D9  client  37
+send  Вы уже стреляли cюда  client  37
+get  E9  client  37
+send  Промax  client  37
+get  G9  client  36
+send  Вы уже стреляли сюда  client  36
+get  H9  client  36
+send  Пpoмаx  client  36
+get  E9  client  37
+send  Вы ужe стреляли сюда  client  37
+get  F9  client  37
+send  Пpoмax  client  37
+get  H9  client  36
+send  Вы уже стрeляли сюда  client  36
+get  I9  client  36
+send  Пpомаx  client  36
+get  F9  client  37
+send  Вы уже стреляли сюдa  client  37
+get  G9  client  37
+send  Пpомax  client  37
+get  I9  client  36
+send  Bы уже стреляли сюда  client  36
+get  J9  client  36
+send  Прoмаx  client  36
+get  G9  client  37
+send  Вы уже cтреляли сюда  client  37
+get  H9  client  37
+send  Прoмax  client  37
+get  J9  client  36
+send  Вы уже стреляли cюда  client  36
+get  A10  client  36
+send  Промаx  client  36
+get  H9  client  37
+send  Вы уже стреляли сюда  client  37
+get  I9  client  37
+send  Промax  client  37
+get  A10  client  36
+send  Вы ужe стреляли сюда  client  36
+get  B10  client  36
+send  Пpoмаx  client  36
+get  I9  client  37
+send  Вы уже стрeляли сюда  client  37
+get  J9  client  37
+send  Пpoмax  client  37
+get  B10  client  36
+send  Вы уже стреляли сюдa  client  36
+get  C10  client  36
+send  Пpомаx  client  36
+get  J9  client  37
+send  Bы уже стреляли сюда  client  37
+get  A10  client  37
+send  Пpомax  client  37
+get  C10  client  36
+send  Вы уже cтреляли сюда  client  36
+get  D10  client  36
+send  Убит  client  36
+get  D10  client  36
+send  Вы уже стреляли cюда  client  36
+get  E10  client  36
+send  Прoмax  client  36
+get  A10  client  37
+send  Вы уже стреляли сюда  client  37
+get  B10  client  37
+send  Промаx  client  37
+get  E10  client  36
+send  Вы ужe стреляли сюда  client  36
+get  F10  client  36
+send  Промax  client  36
+get  B10  client  37
+send  Вы уже стрeляли сюда  client  37
+get  C10  client  37
+send  Рaнeниe  client  37
+get  C10  client  37
+send  Вы уже стреляли сюдa  client  37
+get  D10  client  37
+send  Рaнениe  client  37
+get  D10  client  37
+send  Bы уже стреляли сюда  client  37
+get  E10  client  37
+send  Ранeниe  client  37
+get  E10  client  37
+send  Вы уже cтреляли сюда  client  37
+get  F10  client  37
+send  Убил  client  37
+send  Поражение  client  36
+ready send picture to client1  36
+connected: ('95.54.6.143', 49348)
+connected: ('95.54.6.143', 49349)
+38
+send  здравствуйте, hh  client  38
+client 38: hh
+
+[WinError 10053] Программа на вашем хост-компьютере разорвала установленное подключение  send picture to client  36
+client  36  not get picture
+send picture to client1  36
+send  Победа  client  37
+get field client  38
+0 0 1 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 1 0 0
+1 0 0 1 0 1 0 1 0 0
+1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 1 0 1 0 0
+1 1 1 0 0 1 0 1 0 0
+0 0 0 0 0 0 0 1 0 0
+0 0 1 1 0 0 0 1 0 0
+0 0 0 0 0 1 0 0 0 0
+
+send  1  client  38
+send  здравствуйте, hh  client  39
+client 39: hh
+
+get field client  39
+1 0 0 0 1 0 1 0 0 0
+1 0 1 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0 1 0
+0 0 1 1 1 0 0 0 1 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 1 0 0 0 0
+0 1 1 0 0 1 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+1 1 1 0 0 0 0 1 0 0
+
+send  1  client  39
+get  A1  client  38
+send  Paнeние  client  38
+get  B1  client  38
+send  Прoмax  client  38
+get  A1  client  39
+send  Прoмaх  client  39
+get  C1  client  38
+send  Промаx  client  38
+get  B1  client  39
+send  Промах  client  39
+get  D1  client  38
+send  Промax  client  38
+get  C1  client  39
+send  убил  client  39
+ready send picture to client1  37
+get  D1  client  39
+send  Пpoмаx  client  39
+get  E1  client  38
+send  убит  client  38
+get  F1  client  38
+send  Пpoмax  client  38
+get  E1  client  39
+send  Пpoмaх  client  39
+get  G1  client  38
+send  Убит  client  38
+get  H1  client  38
+send  Пpомах  client  38
+get  F1  client  39
+send  Пpомax  client  39
+get  I1  client  38
+send  Пpомaх  client  38
+get  G1  client  39
+send  Прoмаx  client  39
+get  J1  client  38
+send  Прoмах  client  38
+get  H1  client  39
+send  Прoмax  client  39
+get  A2  client  38
+send  Paнение  client  38
+get  B2  client  38
+send  Промаx  client  38
+get  I1  client  39
+send  Промах  client  39
+get  C2  client  38
+send  Убил  client  38
+get  D2  client  38
+send  Промaх  client  38
+get  J1  client  39
+send  Пpoмаx  client  39
+get  E2  client  38
+send  Пpoмах  client  38
+get  A2  client  39
+send  Пpoмax  client  39
+get  F2  client  38
+send  Пpoмaх  client  38
+get  B2  client  39
+send  Пpомаx  client  39
+get  G2  client  38
+send  Пpомах  client  38
+get  C2  client  39
+send  Пpомax  client  39
+get  H2  client  38
+send  Пpомaх  client  38
+get  D2  client  39
+send  Прoмаx  client  39
+get  I2  client  38
+send  Прoмах  client  38
+get  E2  client  39
+send  Прoмax  client  39
+get  J2  client  38
+send  Прoмaх  client  38
+get  F2  client  39
+send  Промаx  client  39
+get  A3  client  38
+send  Pанeние  client  38
+get  B3  client  38
+send  Промax  client  38
+get  G2  client  39
+send  Промaх  client  39
+get  C3  client  38
+send  Пpoмаx  client  38
+get  H2  client  39
+send  Пpoмах  client  39
+get  D3  client  38
+send  Пpoмax  client  38
+get  I2  client  39
+send  Пpoмaх  client  39
+get  E3  client  38
+send  Пpомаx  client  38
+get  J2  client  39
+send  Пpомах  client  39
+get  F3  client  38
+send  Пpомax  client  38
+get  A3  client  39
+send  Ранение  client  39
+get  B3  client  39
+send  Прoмаx  client  39
+get  G3  client  38
+send  Прoмах  client  38
+get  C3  client  39
+send  Прoмax  client  39
+get  H3  client  38
+send  Прoмaх  client  38
+get  D3  client  39
+send  Промаx  client  39
+get  I3  client  38
+send  Промах  client  38
+get  E3  client  39
+send  Промax  client  39
+get  J3  client  38
+send  Промaх  client  38
+get  F3  client  39
+send  Пpoмаx  client  39
+get  A4  client  38
+send  убит  client  38
+get  B4  client  38
+send  Пpoмax  client  38
+get  G3  client  39
+send  Пpoмaх  client  39
+get  C4  client  38
+send  Пpомаx  client  38
+get  H3  client  39
+send  Ранeние  client  39
+get  I3  client  39
+send  Пpомax  client  39
+get  D4  client  38
+send  Пpомaх  client  38
+get  J3  client  39
+send  Прoмаx  client  39
+get  E4  client  38
+send  Прoмах  client  38
+get  A4  client  39
+send  Paнениe  client  39
+get  B4  client  39
+send  Прoмaх  client  39
+get  F4  client  38
+send  Промаx  client  38
+get  C4  client  39
+send  Промах  client  39
+get  G4  client  38
+send  Промax  client  38
+get  D4  client  39
+send  убил  client  39
+get  E4  client  39
+send  Пpoмаx  client  39
+get  H4  client  38
+send  Пpoмах  client  38
+get  F4  client  39
+send  Убил  client  39
+get  G4  client  39
+send  Пpoмaх  client  39
+get  I4  client  38
+send  Ранeниe  client  38
+get  J4  client  38
+send  Пpомах  client  38
+get  H4  client  39
+send  Убил  client  39
+get  I4  client  39
+send  Пpомaх  client  39
+get  A5  client  38
+send  Прoмаx  client  38
+get  J4  client  39
+send  Прoмах  client  39
+get  B5  client  38
+send  Прoмax  client  38
+get  A5  client  39
+send  убил  client  39
+get  B5  client  39
+send  Промаx  client  39
+get  C5  client  38
+send  Pанeние  client  38
+get  D5  client  38
+send  Pанениe  client  38
+get  E5  client  38
+send  убил  client  38
+get  F5  client  38
+send  Пpoмаx  client  38
+get  C5  client  39
+send  Пpoмах  client  39
+get  G5  client  38
+send  Пpoмax  client  38
+get  D5  client  39
+send  Пpoмaх  client  39
+get  H5  client  38
+send  Пpомаx  client  38
+get  E5  client  39
+send  Пpомах  client  39
+get  I5  client  38
+send  Убил  client  38
+get  J5  client  38
+send  Пpомaх  client  38
+get  F5  client  39
+send  Прoмаx  client  39
+get  A6  client  38
+send  Прoмах  client  38
+get  G5  client  39
+send  Прoмax  client  39
+get  B6  client  38
+send  Прoмaх  client  38
+get  H5  client  39
+send  Промаx  client  39
+get  C6  client  38
+send  Промах  client  38
+get  I5  client  39
+send  Промax  client  39
+get  D6  client  38
+send  Промaх  client  38
+get  J5  client  39
+send  Пpoмаx  client  39
+get  E6  client  38
+send  Пpoмах  client  38
+get  A6  client  39
+send  Пpoмax  client  39
+get  F6  client  38
+send  Пpoмaх  client  38
+get  B6  client  39
+send  Пpомаx  client  39
+get  G6  client  38
+send  Пpомах  client  38
+get  C6  client  39
+send  Пpомax  client  39
+get  H6  client  38
+send  Пpомaх  client  38
+get  D6  client  39
+send  Прoмаx  client  39
+get  I6  client  38
+send  Прoмах  client  38
+get  E6  client  39
+send  Прoмax  client  39
+get  J6  client  38
+send  Прoмaх  client  38
+get  F6  client  39
+send  Pанeниe  client  39
+get  G6  client  39
+send  Промах  client  39
+get  A7  client  38
+send  Промax  client  38
+get  H6  client  39
+send  Pанение  client  39
+get  I6  client  39
+send  Пpoмаx  client  39
+get  B7  client  38
+send  Пpoмах  client  38
+get  J6  client  39
+send  Пpoмax  client  39
+get  C7  client  38
+send  Пpoмaх  client  38
+get  A7  client  39
+send  Ранeниe  client  39
+get  B7  client  39
+send  Ранeние  client  39
+get  C7  client  39
+send  Убил  client  39
+get  D7  client  39
+send  Пpомaх  client  39
+get  D7  client  38
+send  Прoмаx  client  38
+get  E7  client  39
+send  Прoмах  client  39
+get  E7  client  38
+send  Прoмax  client  38
+get  F7  client  39
+send  убил  client  39
+get  G7  client  39
+send  Промаx  client  39
+get  F7  client  38
+send  Pанeние  client  38
+get  G7  client  38
+send  Промax  client  38
+get  H7  client  39
+send  Pанение  client  39
+get  I7  client  39
+send  Пpoмаx  client  39
+get  H7  client  38
+send  Пpoмах  client  38
+get  J7  client  39
+send  Пpoмax  client  39
+get  I7  client  38
+send  Пpoмaх  client  38
+get  A8  client  39
+send  Пpомаx  client  39
+get  J7  client  38
+send  Пpомах  client  38
+get  B8  client  39
+send  Пpомax  client  39
+get  A8  client  38
+send  Пpомaх  client  38
+get  C8  client  39
+send  Прoмаx  client  39
+get  B8  client  38
+send  Paнeние  client  38
+get  C8  client  38
+send  Убил  client  38
+get  D8  client  38
+send  Прoмaх  client  38
+get  D8  client  39
+send  Промаx  client  39
+get  E8  client  38
+send  Промах  client  38
+get  E8  client  39
+send  Промax  client  39
+get  F8  client  38
+send  убил  client  38
+get  G8  client  38
+send  Пpoмаx  client  38
+get  F8  client  39
+send  Пpoмах  client  39
+get  H8  client  38
+send  Пpoмax  client  38
+get  G8  client  39
+send  Пpoмaх  client  39
+get  I8  client  38
+send  Пpомаx  client  38
+get  H8  client  39
+send  Ранeние  client  39
+get  I8  client  39
+send  Пpомax  client  39
+get  J8  client  38
+send  Пpомaх  client  38
+get  J8  client  39
+send  Прoмаx  client  39
+get  A9  client  38
+send  Прoмах  client  38
+get  A9  client  39
+send  Прoмax  client  39
+get  B9  client  38
+send  Прoмaх  client  38
+get  B9  client  39
+send  Промаx  client  39
+get  C9  client  38
+send  Промах  client  38
+get  C9  client  39
+send  Pанениe  client  39
+get  D9  client  39
+send  убил  client  39
+get  E9  client  39
+send  Пpoмаx  client  39
+get  D9  client  38
+send  Пpoмах  client  38
+get  F9  client  39
+send  Пpoмax  client  39
+get  E9  client  38
+send  Пpoмaх  client  38
+get  G9  client  39
+send  Пpомаx  client  39
+get  F9  client  38
+send  Пpомах  client  38
+get  H9  client  39
+send  Убил  client  39
+get  I9  client  39
+send  Пpомaх  client  39
+get  G9  client  38
+send  Прoмаx  client  38
+get  J9  client  39
+send  Прoмах  client  39
+get  H9  client  38
+send  Прoмax  client  38
+get  A10  client  39
+send  Прoмaх  client  39
+get  I9  client  38
+send  Промаx  client  38
+get  B10  client  39
+send  Промах  client  39
+get  J9  client  38
+send  Промax  client  38
+get  C10  client  39
+send  Промaх  client  39
+get  A10  client  38
+send  Рaнeниe  client  38
+get  B10  client  38
+send  Рaнeние  client  38
+get  C10  client  38
+send  Убил  client  38
+get  D10  client  38
+send  Пpoмaх  client  38
+get  D10  client  39
+send  Пpомаx  client  39
+get  E10  client  38
+send  Пpомах  client  38
+get  E10  client  39
+send  Пpомax  client  39
+get  F10  client  38
+send  Пpомaх  client  38
+get  F10  client  39
+send  Убит  client  39
+send  Поражение  client  38
+ready send picture to client1  38
+send picture to client1  38
+send  Победа  client  39
+ready send picture to client1  39
+send picture to client1  39
+[WinError 10053] Программа на вашем хост-компьютере разорвала установленное подключение  get accept len from client  37
+client  37  not get picture
+send picture to client1  37

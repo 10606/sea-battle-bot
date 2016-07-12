@@ -27,14 +27,16 @@ def get_list_byte(sock, i): #получает часть картинки чит
             siz1 = data[10:20]
             siz0 = (siz1).decode('utf-8')
             siz = int(siz0)
+            siz -= 20
             data = sock.recv(siz)
 
-            if (len(data) + 20 < siz or pos != i):
+            if (len(data) < siz or pos != i):
                 if (time.time() - time_a > 20):
                     time_a = time.time()
                     print("сервер не получил подтверждения ", pos, i)
                     if (send_accept(sock) == "*"):
                         return "*"
+                    continue
                 else:
                     continue
         except Exception as e:
