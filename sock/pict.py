@@ -15,6 +15,7 @@ def send_accept(sock): #отправляет подтвердение серве
 def get_list_byte(sock, i): #получает часть картинки читая заголовок а потом основную часть таймаут 420
     msg = ""
     t_time = time.time()
+    time_a = time.time()
     while True:
         try:
             data = sock.recv(20)
@@ -27,7 +28,8 @@ def get_list_byte(sock, i): #получает часть картинки чит
             siz0 = (siz1).decode('utf-8')
             siz = int(siz0)
             data = sock.recv(siz)
-            if (time.time() - t_time > 10):
+            if (time.time() - time_a > 5):
+                time_a = time.time()
                 if (send_accept(sock) == "*"):
                     return "*"
             if (len(data) + 20 < siz or pos != i):
