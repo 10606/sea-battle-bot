@@ -32,7 +32,7 @@ def get_list_byte(sock, i): #получает часть картинки чит
             if (len(data) + 20 < siz or pos != i):
                 if (time.time() - time_a > 20):
                     time_a = time.time()
-                    print("сервер не получил подтверждения")
+                    print("сервер не получил подтверждения ", pos, i)
                     if (send_accept(sock) == "*"):
                         return "*"
                 else:
