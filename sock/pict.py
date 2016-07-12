@@ -28,7 +28,7 @@ def get_list_byte(sock, i): #получает часть картинки чит
             siz0 = (siz1).decode('utf-8')
             siz = int(siz0)
             data = sock.recv(siz)
-            if (time.time() - time_a > 5):
+            if (time.time() - time_a > 10):
                 time_a = time.time()
                 if (send_accept(sock) == "*"):
                     return "*"
