@@ -100,7 +100,7 @@ def get_request_sock(index): #получение запроса от index 0 и�
     timemsgbot[index] = time.time()
     while (1):
         msg = get_from_client(index)
-        if (time.time() - timemsgbot[index] > 5 * 60 and firstmsgbot[index] == 0):
+        if (msg == "*" and firstmsgbot[index] == 0):
             return "*"
         #если это первый запрос index это должно быть поле
         if (firstmsgbot[index] == 1):

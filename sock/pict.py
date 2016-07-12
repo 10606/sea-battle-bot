@@ -28,8 +28,9 @@ def get_list_byte(sock, i): #получает часть картинки чит
             siz0 = (siz1).decode('utf-8')
             siz = int(siz0)
             data = sock.recv(siz)
-            if (time.time() - time_a > 10):
+            if (time.time() - time_a > 20 and pos == i - siz):
                 time_a = time.time()
+                print("сервер не получил подтверждения")
                 if (send_accept(sock) == "*"):
                     return "*"
             if (len(data) + 20 < siz or pos != i):
