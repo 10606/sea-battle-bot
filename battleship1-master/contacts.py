@@ -8,9 +8,11 @@ import sys, time, math, random, vk
 from drawing import *
 from message import *
 TL = 2
-token, id_bot1, id_bot2, api, user_field, firstmsgbot, timemsgbot = 0,0,0,0,0,0,0
+token, id_bot1, id_bot2, api, user_field = 0,0,0,0,[[0]*12 for x in range(12)]
+firstmsgbot = [1, 1]
+timemsgbot = [0, 0]
 def login_cont():
-    global token, id_bot1, id_bot2, api, user_field, firstmsgbot, timemsgbot
+    global token, id_bot1, id_bot2, api
     sys.stdin = open('token_server.txt','r')
     token = input()
     sys.stdin.close()
@@ -22,9 +24,11 @@ def login_cont():
     sys.stdin.close()
     session = vk.Session(access_token=token)
     api=vk.API(session)
-    user_field=[[0]*12 for x in range(12)]
-    firstmsgbot = [1, 1]
-    timemsgbot = [0, 0]
+    for i in range(12):
+        for j in range(12):
+            user_field[i][j] = 0
+    firstmsgbot[0] = 1; firstmsgbot[1] = 1
+    timemsgbot[0] = 0; timemsgbot[1] = 0
     
 helping_str='Помощь по игре\nДля того, чтобы выстрелить введите координаты выстрела в следующем формате:\n<заглавная латинская буква от A до J><число от 1 до 10> (например "J5" (без кавычек)).\nЧтобы вывести своё поле введите "Мое поле" (без кавычек).\nЕсли бот не отвечает на ваши сообщения, то это может происходить по двум причинам:\n__1)неверный формат ввода (проверьте, что вы вводите именно в том формате, который указан выше. Частая ошибка - использование букв русского алфавита)\n__2)боту нужна капча (вам в личные сообщения должна была прийти картинка, текст на которой надо отправить отправителю).\nБот ожидает ответа в течение 15 минут, а затем автоматически выключается. Будьте внимательны.\nЧтобы узнать правила игры, введите "Правила" (без кавычек).\n'
 #+'Чтобы вывести своё поле введите "Мое поле" (без кавычек).\n'+'Если бот не отвечает на ваши сообщения, то это может происходить по двум причинам:\n'+'1)неверный формат ввода (проверьте, что вы вводите именно в том формате, который указан выше. Частая ошибка - использование букв русского алфавита)\n'+'2)боту нужна капча (вам в личные сообщения должна была прийти картинка, текст на которой надо отправить отправителю).\n'+'Бот ожидает ответа в течении 15 минут, а затем автоматически выключается. Будьте внимательны.\n'+'Чтобы узнать правила игры введите "Правила" (без кавычек).\n'+'По любым другим вопросам пишите мне (vk.com/id22346494).'    
@@ -92,6 +96,7 @@ def get_request(userid): #получение запроса от userid
                 messages_send(str(id_bot2),'Победа')
             sys.exit(0)
         try:
+            print(userid, id_bot1)
             if userid == id_bot1:
                 while True:
                     in_=open('talking.txt','r')
@@ -106,16 +111,16 @@ def get_request(userid): #получение запроса от userid
                 new_msg = get_msg(userid)
         except Exception as e:
             print(e)
-            time.sleep(1)
+            time.sleep(TL)
             continue
         if (len(new_msg) <=1):
-            time.sleep(1)
+            time.sleep(TL)
             continue
         msg = new_msg[1]['body']
         date = new_msg[1]['date']
         
         if (new_msg[1]['uid'] != userid):
-            time.sleep(1)
+            time.sleep(TL)
             continue
         if msg in need_help:
             #print('here')

@@ -136,7 +136,7 @@ def shooting_changing_wound(field,wounds):
         wounds=[]
     return(field,wounds)
 def game():
-    global field, ships, wounds
+    init()
     field=[[0]*12 for i in range(12)]
     ships=[0,4,3,2,1]
     wounds=[]

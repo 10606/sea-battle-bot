@@ -18,6 +18,7 @@ def login_messages():
     sys.stdin=open('token_captcha.txt','r')
     captcha=input()
     sys.stdin.close()
+
 #отправляет сообщение пользователю to_id (с обходом капчи)
 def messages_send(to_id, msg):
     if str(to_id) == bo:

@@ -46,7 +46,7 @@ def send_message(x,y):
             out.write(letter[y-1]+str(x))
             out.close()
             #api.messages.send(user_id=id_server, message=letter[y - 1] + str(x))
-            #print(letter[y-1]+str(x))
+            print(letter[y-1]+str(x))
             break
         except Exception as e:
             print(e, ctr)
@@ -169,6 +169,7 @@ def make_field():
 
 #отправка поля
 def send_field_to_server(field):
+    print('Начинаю отправку')
     msg = ""
     for i in range(1, 11):
         for j in range(1, 11):
@@ -221,7 +222,7 @@ def login_client():
     api=vk.API(session)
     killed=0
     last_message=0
-    init()
+    
 
 
 
