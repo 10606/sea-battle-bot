@@ -33,6 +33,7 @@ while True:
             serv.join() # Ждем завершения всех потоков
             bot.join()
             users_file = open('users.txt','w') # Переписываем весь файл. TODO: Более элегантное решение
+            users_time[player] = i['time'] # Обновляем время последней игры
             for ids in users_time.keys():
                 users_file.write(str(ids)+' '+str(users_time[ids]))
             users_file.close()
