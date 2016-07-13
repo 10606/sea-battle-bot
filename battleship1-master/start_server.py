@@ -26,6 +26,7 @@ except FileNotFoundError:
 except Exception as e:
     print('Необработанное исключение!\n Текст:\n',e) # Защита от вылетов
 while True:
+    messages = {}
     while True:
         try:
             messages = api.messages.search(q='хочу играть',count=100) # Кодовое слово для начала игры
