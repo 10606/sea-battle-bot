@@ -10,11 +10,19 @@ py_flag=0
 if py_flag:
     from frontend import *
     import pygame
-
+id_bot1 = 0; id_bot2 = 0
+def login_serv():
+    global id_bot1, id_bot2
+    sys.stdin = open('bot1.txt','r')
+    id_bot1 = int(input()) #ввести id бота 1
+    sys.stdin.close()
+    sys.stdin = open('bot2.txt','r')
+    id_bot2 = int(input()) #ввести id бота 2
+    sys.stdin.close()
 def login():
     login_cont()
     login_messages()
-    login_client()
+    login_serv()
     
 # создание полей
 field1 = [[0]*10 for x in range(10)]
@@ -143,6 +151,7 @@ def get_tue_ans(msg):
 def main ():
     global gg
     global user_field
+    print(user_field)
     #получение и проверка поля бота 1
     flag1 = 0
     while (flag1 == 0):
@@ -361,6 +370,11 @@ def main ():
         send_answer(id_bot1, "Победа")
 def st_serv():
     login()
+    field1 = [[0]*10 for x in range(10)]
+    field2 = [[0]*10 for x in range(10)]
+    bot_field=[[0]*12 for x in range(12)]
+    res_field1=[[0]*10 for x in range(10)]
+    res_field2=[[0]*10 for x in range(10)]
     msg='Здравствуйте! Коротко о формате игры:\n Игра идет по стандартным правилам морского боя. Для начала игры отправьте серверу поле в формате 10х10, состоящее из 0 и 1. 1 означает, что в этой клетке находится корабль, 0 - нет. Для вашего удобства вам будут предоставлены 5 случайно сгенерированных полей, которые достаточно просто скопировать.\n Формат выстрела: <Заглавная латинская буква от A до J><число от 1 до 10> (например, J5). Бот игнорирует любые сообщения, отправленные не в описанном формате. Выстрел можно совершать только после соответствующей команды сервера.\n Все вопросы задавайте мне (vk.com/id22346494).\n Подробнее с правилами игры вы сможете ознакомиться, введя "Правила" (без кавычек).\n Если вам нужна помощь, введите "Помощь" (без кавычек)'
     send_answer(id_bot2,msg)      
     msg='Для начала игры скопируйте одно из следующих полей и отправьте его боту\n\n'
