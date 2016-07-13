@@ -28,7 +28,7 @@ except Exception as e:
 while True:
     while True:
         try:
-            messages = api.messages.search(q='хочу играть',count=200) # Кодовое слово для начала игры
+            messages = api.messages.search(q='хочу играть',count=100) # Кодовое слово для начала игры
             break
         except Exception as e:
             print('Исключение!',e)
