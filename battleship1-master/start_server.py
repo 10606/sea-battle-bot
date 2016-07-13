@@ -26,7 +26,6 @@ except FileNotFoundError:
 except Exception as e:
     print('Необработанное исключение!\n Текст:\n',e) # Защита от вылетов
 while True:
-    messages = {}
     while True:
         try:
             messages = api.messages.search(q='хочу играть',count=100) # Кодовое слово для начала игры
@@ -34,9 +33,8 @@ while True:
         except Exception as e:
             print('Исключение!',e)
             time.sleep(2)
-    arr = messages['items']
-    for i in arr: # Пока не отработаем все старые сообщения, новые не принимаем
-        player,time = i['user_id'], i['time'] # id игрока и время сообщения
+    for i in messages[1:]: # Пока не отработаем все старые сообщения, новые не принимаем
+        player,time = i['uid'], i['date'] # id игрока и время сообщения
         if player not in users_time.keys(): # Если игрок еще никогда не играл
             users_time[player] = 0
         if users_time[player] < time: # Если это не спам, то начинаем играть
