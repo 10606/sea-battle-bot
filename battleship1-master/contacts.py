@@ -8,18 +8,24 @@ import sys, time, math, random, vk
 from drawing import *
 from message import *
 TL = 2
-sys.stdin = open('token_server.txt','r')
-token = input()
-sys.stdin.close()
-sys.stdin = open('bot1.txt','r')
-id_bot1 = int(input()) #ввести id бота 1
-sys.stdin.close()
-sys.stdin = open('bot2.txt','r')
-id_bot2 = int(input()) #ввести id бота 2
-sys.stdin.close()
-session = vk.Session(access_token=token)
-api=vk.API(session)
-user_field=[[0]*12 for x in range(12)]
+token, id_bot1, id_bot2, api, user_field, firstmsgbot, timemsgbot = 0,0,0,0,0,0,0
+def login_cont():
+    global token, id_bot1, id_bot2, api, user_field, firstmsgbot, timemsgbot
+    sys.stdin = open('token_server.txt','r')
+    token = input()
+    sys.stdin.close()
+    sys.stdin = open('bot1.txt','r')
+    id_bot1 = int(input()) #ввести id бота 1
+    sys.stdin.close()
+    sys.stdin = open('bot2.txt','r')
+    id_bot2 = int(input()) #ввести id бота 2
+    sys.stdin.close()
+    session = vk.Session(access_token=token)
+    api=vk.API(session)
+    user_field=[[0]*12 for x in range(12)]
+    firstmsgbot = [1, 1]
+    timemsgbot = [0, 0]
+    
 helping_str='Помощь по игре\nДля того, чтобы выстрелить введите координаты выстрела в следующем формате:\n<заглавная латинская буква от A до J><число от 1 до 10> (например "J5" (без кавычек)).\nЧтобы вывести своё поле введите "Мое поле" (без кавычек).\nЕсли бот не отвечает на ваши сообщения, то это может происходить по двум причинам:\n__1)неверный формат ввода (проверьте, что вы вводите именно в том формате, который указан выше. Частая ошибка - использование букв русского алфавита)\n__2)боту нужна капча (вам в личные сообщения должна была прийти картинка, текст на которой надо отправить отправителю).\nБот ожидает ответа в течение 15 минут, а затем автоматически выключается. Будьте внимательны.\nЧтобы узнать правила игры, введите "Правила" (без кавычек).\n'
 #+'Чтобы вывести своё поле введите "Мое поле" (без кавычек).\n'+'Если бот не отвечает на ваши сообщения, то это может происходить по двум причинам:\n'+'1)неверный формат ввода (проверьте, что вы вводите именно в том формате, который указан выше. Частая ошибка - использование букв русского алфавита)\n'+'2)боту нужна капча (вам в личные сообщения должна была прийти картинка, текст на которой надо отправить отправителю).\n'+'Бот ожидает ответа в течении 15 минут, а затем автоматически выключается. Будьте внимательны.\n'+'Чтобы узнать правила игры введите "Правила" (без кавычек).\n'+'По любым другим вопросам пишите мне (vk.com/id22346494).'    
 help_mas=['Мое поле','Моё поле','мое поле','моё поле']
@@ -42,8 +48,6 @@ def send_answer(userid, msg): #отправка ответа
             print(e,ctr)
 
 
-firstmsgbot = [1, 1]
-timemsgbot = [0, 0]
 
 def check_format_field(msg): #проверка что это поле по формату
     #print('enter the function')

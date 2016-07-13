@@ -5,14 +5,17 @@ from check_field import *
 from contacts import *
 from drawing import *
 from check_okrest import *
+from client_cerver import *
 py_flag=0
 if py_flag:
     from frontend import *
     import pygame
 
 def login():
+    login_cont()
     login_messages()
     login_client()
+    
 # создание полей
 field1 = [[0]*10 for x in range(10)]
 field2 = [[0]*10 for x in range(10)]
