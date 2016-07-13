@@ -10,7 +10,7 @@ token.close()
 try:
     users_file = open('users.txt','r')
     users_time = {}
-    reads = ' '
+    reads = users_file.readline()
     while reads != '': # While not eof
         reads = users_file.readline()
         user,time = reads.split(' ')
