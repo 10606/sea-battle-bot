@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys,vk, threading
+import sys,vk, threading,time
 from main_server import *
 from my_algo import *
 # Чтение токена
@@ -23,14 +23,17 @@ except FileNotFoundError:
     users_file.write('')               # Создаем файл, если его не существует
     users_file.close()                 #
 except Exception as e:
-    print('Необработанное исключение!\n Текст:\n',sys.exc_info()[0]) # Защита от вылетов
+    print('Необработанное исключение!\n Текст:\n',e) # Защита от вылетов
 while True:
     while True:
         try:
             messages = api.messages.search(q='хочу играть',count=200) # Кодовое слово для начала игры
             break
         except Exception as e:
-            print('Исключение!',sys.exc_info()[0])
+            print('Исключение!',e)
+            time.sleep(10)
+    if len(messages['items']) == 0:
+        time.sleep(10)
     for i in messages['items']: # Пока не отработаем все старые сообщения, новые не принимаем
         player,time = i['user_id'], i['time'] # id игрока и время сообщения
         if player not in users_time.keys(): # Если игрок еще никогда не играл
