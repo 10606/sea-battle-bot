@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-import sys,vk, threading,time
+import sys,vk, threading, time
 from main_server import *
 from my_algo import *
 # Чтение токена
 token = open('token_server.txt','r')
-api = vk.API(vk.Session(access_token=token.read()))
+gg = token.read()
+api = vk.API(vk.Session(access_token=gg[:-1]))
 token.close()
 # Чтение всех пользователей, даты последней игры. "Антиспам"
 try:
     users_file = open('users.txt','r')
     users_time = {}
-    reads = users_file.readline()
+    reads = ' '
     while reads != '': # While not eof
         reads = users_file.readline()
         user,time = reads.split(' ')
@@ -31,9 +32,7 @@ while True:
             break
         except Exception as e:
             print('Исключение!',e)
-            time.sleep(10)
-    if len(messages['items']) == 0:
-        time.sleep(10)
+            time.sleep(2)
     for i in messages['items']: # Пока не отработаем все старые сообщения, новые не принимаем
         player,time = i['user_id'], i['time'] # id игрока и время сообщения
         if player not in users_time.keys(): # Если игрок еще никогда не играл
