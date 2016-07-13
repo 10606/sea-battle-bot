@@ -34,7 +34,8 @@ while True:
         except Exception as e:
             print('Исключение!',e)
             time.sleep(2)
-    for i in messages['items']: # Пока не отработаем все старые сообщения, новые не принимаем
+    arr = messages['items']
+    for i in arr: # Пока не отработаем все старые сообщения, новые не принимаем
         player,time = i['user_id'], i['time'] # id игрока и время сообщения
         if player not in users_time.keys(): # Если игрок еще никогда не играл
             users_time[player] = 0
