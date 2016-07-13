@@ -1,20 +1,23 @@
 import requests, sys,time,json, urllib.request,vk
 TL = 2
-sys.stdin=open('token_server.txt','r')
-token=input()
-sys.stdin.close()
-sys.stdin=open('bot1.txt','r')
-bo=input()
-sys.stdin.close()
-sys.stdin=open('capt_chat.txt','r')
-bot1=input()
-sys.stdin.close()
-sys.stdin=open('bot2.txt','r')
-bot2=input()
-sys.stdin.close()
-sys.stdin=open('token_captcha.txt','r')
-captcha=input()
-sys.stdin.close()
+token = 0; bo = 0; bot1 = 0; bot2 = 0; captcha = 0 
+def login_messages():
+    global token, bo, bot1, bot2, captcha
+    sys.stdin=open('token_server.txt','r')
+    token=input()
+    sys.stdin.close()
+    sys.stdin=open('bot1.txt','r')
+    bo=input()
+    sys.stdin.close()
+    sys.stdin=open('capt_chat.txt','r')
+    bot1=input()
+    sys.stdin.close()
+    sys.stdin=open('bot2.txt','r')
+    bot2=input()
+    sys.stdin.close()
+    sys.stdin=open('token_captcha.txt','r')
+    captcha=input()
+    sys.stdin.close()
 #отправляет сообщение пользователю to_id (с обходом капчи)
 def messages_send(to_id, msg):
     if str(to_id) == bo:

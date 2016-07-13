@@ -6,16 +6,6 @@ import sys, time, math,random
 import vk
 from message import *
 from check_okrest import *
-sys.stdin=open('token_bot.txt','r')###
-token=input()
-sys.stdin.close()
-sys.stdin=open('server.txt','r')
-id_server=int(input()) #ввести id сервера
-sys.stdin.close()
-session=vk.Session(access_token=token)
-api=vk.API(session)
-killed=0
-last_message=0
 
 mimo = ['Прoмаx','Прoмах','Прoмax','Прoмaх','Промаx','Промах','Промax','Промaх','Пpoмаx','Пpoмах','Пpoмax','Пpoмaх','Пpомаx',
         'Пpомах','Пpомax','Пpомaх']
@@ -23,6 +13,8 @@ ranen = ['Paнeниe','Paнeние','Paнениe','Paнение','Pанeниe','
          'Pанениe','Pанение','Рaнeниe','Рaнeние','Рaнениe',
          'Рaнение','Ранeниe','Ранeние','Ранениe','Ранение']
 ubit = ['Убит','убит','Убил','убил'] 
+
+token, id_server, api, killed, last_message = 0, 0, 0, 0, 0
 
 #получение сообщения
 def message_get():
@@ -216,7 +208,22 @@ def init():
     #print('turn =',turn)
     #my_field = make_field()
     send_field()
-init()
+    
+def login_client():
+    global token, id_server, api, killed, last_message
+    sys.stdin=open('token_bot.txt','r')###
+    token=input()
+    sys.stdin.close()
+    sys.stdin=open('server.txt','r')
+    id_server=int(input()) #ввести id сервера
+    sys.stdin.close()
+    session=vk.Session(access_token=token)
+    api=vk.API(session)
+    killed=0
+    last_message=0
+    init()
+
+
 
 #функция игры
 #используйте get_answer(a,b): по координатам a b [1 10] возвращает результат выстрела
