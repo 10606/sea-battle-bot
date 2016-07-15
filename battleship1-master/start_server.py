@@ -9,7 +9,11 @@ token = open('token_server.txt','r')
 gg = token.read()
 api = vk.API(vk.Session(access_token=gg[:-1]))
 token.close()
-postId = api.wall.post(message='Бот свободен.')['post_id'] # Делаем запись о том, что бот свободен
+botOfff = open('post.txt','r')
+botoff = botOfff.readline()
+botOfff.close()
+api.wall.delete(post_id=botoff) # Удаляем запись о том, что бот отключен
+postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта:https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
 api.wall.pin(post_id=postId)                    # Закрепляем запись
 # Чтение всех пользователей, даты последней игры. "Антиспам"
 try:
@@ -54,8 +58,9 @@ try:
                 out.close()
                 playerName = api.users.get(user_ids=player,name_case='ins')[0]
                 api.wall.delete(post_id=postId)
-                postId = api.wall.post(message='Сейчас игра идет с {0}. Бот занят'.format(
-                    playerName['first_name'] + ' ' + playerName['last_name']))['post_id'] # Публикуем пост отом, что бот занят
+                postId = api.wall.post(message='Сейчас идет игра с @id{1}({0}). Бот занят. \n Хочешь поиграть? Смотри, как это сделать, тут: https://new.vk.com/battleship_chat '.format(
+                    playerName['first_name'] + ' ' + playerName['last_name'],
+                    player))['post_id'] # Публикуем пост о том, что бот занят
                 api.wall.pin(post_id=postId)
                 record = open('bot2.txt','w') # Пишем в файл id игрока для мэина
                 record.write(str(player))
@@ -72,7 +77,13 @@ try:
                     users_file.write(str(ids)+' '+str(users_time[ids]) + '\n')
                 users_file.close()
                 api.wall.delete(post_id=postId)
-                postId = api.wall.post(message='Бот свободен.')['post_id'] # Делаем запись о том, что бот свободен
+                postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта:https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
                 api.wall.pin(post_id=postId)  # Закрепляем запись
 except KeyboardInterrupt or SystemExit: # Если вы решили выйти
     api.wall.delete(post_id=postId)
+    pId = api.wall.post(message='Бот выключен.\n'
+                                'Узнай о его включении в официальной группе проекта: https://vk.com/battleship_chat !')['post_id']
+    api.wall.pin(post_id=pId)
+    post = open('post.txt', 'w')
+    post.write(str(pId))
+    post.close()
