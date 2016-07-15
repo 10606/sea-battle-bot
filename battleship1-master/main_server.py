@@ -361,13 +361,16 @@ def main ():
             window.blit(screen,(0,0))
             pygame.display.flip()
     get_result(res_field1,res_field2, id_bot2)
-
+    result = open('result.txt','w')
     if (ship1 == 0):
         send_answer(id_bot1, "Поражение")
         send_answer(id_bot2, "Победа")
+        result.write('victory')
     else:
         send_answer(id_bot2, "Поражение")
         send_answer(id_bot1, "Победа")
+        result.write('lose')
+    result.close()
 def st_serv():
     login()
     for i in range(10):
