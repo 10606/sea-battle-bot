@@ -9,6 +9,8 @@ token = open('token_server.txt','r')
 gg = token.read()
 api = vk.API(vk.Session(access_token=gg[:-1]))
 token.close()
+postId = api.wall.post(message='Бот свободен.')['post_id'] # Делаем запись о том, что бот свободен
+api.wall.pin(post_id=postId)                    # Закрепляем запись
 # Чтение всех пользователей, даты последней игры. "Антиспам"
 try:
     users_file = open('users.txt','r')
@@ -40,8 +42,6 @@ try:
                 time.sleep(2)
         if len(messages) == 1:
             continue
-        #print(len(messages))
-        #print(messages)
         for i in messages[-1::-1]: # Пока не отработаем все старые сообщения, новые не принимаем
             if type(i) is int:
                 continue
@@ -52,6 +52,11 @@ try:
                 out = open('talking.txt','w')
                 out.write('gameBegan with '+str(player)) # Лог by Игорь
                 out.close()
+                playerName = api.users.get(user_ids=player,name_case='ins')[0]
+                api.wall.delete(post_id=postId)
+                postId = api.wall.post(message='Сейчас игра идет с {0}. Бот занят'.format(
+                    playerName['first_name'] + ' ' + playerName['last_name']))['post_id'] # Публикуем пост отом, что бот занят
+                api.wall.pin(post_id=postId)
                 record = open('bot2.txt','w') # Пишем в файл id игрока для мэина
                 record.write(str(player))
                 record.close()
@@ -66,10 +71,8 @@ try:
                 for ids in users_time.keys():
                     users_file.write(str(ids)+' '+str(users_time[ids]) + '\n')
                 users_file.close()
+                api.wall.delete(post_id=postId)
+                postId = api.wall.post(message='Бот свободен.')['post_id'] # Делаем запись о том, что бот свободен
+                api.wall.pin(post_id=postId)  # Закрепляем запись
 except KeyboardInterrupt or SystemExit: # Если вы решили выйти
-    os.remove('bot2.txt')
-    users_file = open('users.txt', 'w')
-    for ids in users_time.keys():
-        users_file.write(str(ids) + ' ' + str(users_time[ids]) + '\n')
-    users_file.close()
-    exit(0)
+    api.wall.delete(post_id=postId)
