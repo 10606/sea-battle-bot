@@ -1,3 +1,5 @@
 __pycache__/
 .idea/*
 .idea/
+battleship1-master/token_server.txt
+battleship1-master/token_captcha.txt
