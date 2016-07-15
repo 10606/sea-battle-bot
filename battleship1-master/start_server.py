@@ -4,6 +4,7 @@ from main_server import *
 from my_algo import *
 # Чтение токена
 lastgame = 0
+ts=int(time.time())
 token = open('token_server.txt','r')
 gg = token.read()
 api = vk.API(vk.Session(access_token=gg[:-1]))
@@ -47,7 +48,7 @@ try:
             player,times = i['uid'], i['date'] # id игрока и время сообщения
             if player not in users_time.keys(): # Если игрок еще никогда не играл
                 users_time[player] = 0
-            if users_time[player] < times: # Если это не спам, то начинаем играть
+            if users_time[player] < times and ts < times: # Если это не спам, то начинаем играть
                 out = open('talking.txt','w')
                 out.write('gameBegan with '+str(player)) # Лог by Игорь
                 out.close()

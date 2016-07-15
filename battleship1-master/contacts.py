@@ -97,7 +97,6 @@ def get_request(userid): #получение запроса от userid
                 messages_send(str(id_bot2),'Победа')
             sys.exit(0)
         try:
-            print(userid, id_bot1)
             if userid == id_bot1:
                 while True:
                     in_=open('talking.txt','r')
