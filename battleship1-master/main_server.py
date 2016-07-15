@@ -362,6 +362,7 @@ def main ():
             window.blit(screen,(0,0))
             pygame.display.flip()
     get_result(res_field1,res_field2, id_bot2)
+
     if (ship1 == 0):
         send_answer(id_bot1, "Поражение")
         send_answer(id_bot2, "Победа")

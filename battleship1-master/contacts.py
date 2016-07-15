@@ -50,6 +50,7 @@ def send_answer(userid, msg): #отправка ответа
         except Exception as e:
             time.sleep(1)
             print(e,ctr)
+    print('Работает!')
 
 
 

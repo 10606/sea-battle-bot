@@ -14,9 +14,10 @@ try:
     users_time = {}
     reads = users_file.readline()
     while reads != '': # While not eof
+        print(reads.split())
+        user,times = reads.split(' ')
+        users_time[int(user)] = int(times)
         reads = users_file.readline()
-        user,time = reads.split(' ')
-        users_time[int(user)] = int(time)
     users_file.close()
 except FileNotFoundError:
     users_time = {}
@@ -30,16 +31,21 @@ try:
     while True:
         while True:
             try:
+                time.sleep(2)
                 messages = api.messages.search(q='хочу играть',count=100) # Кодовое слово для начала игры
                 break
             except Exception as e:
                 print('Исключение!',e)
                 time.sleep(2)
-        for i in messages[-2::-1]: # Пока не отработаем все старые сообщения, новые не принимаем
-            player,time = i['uid'], i['date'] # id игрока и время сообщения
+        if len(messages) == 1:
+            continue
+        for i in messages[-1::-1]: # Пока не отработаем все старые сообщения, новые не принимаем
+            if type(i) is int:
+                continue
+            player,times = i['uid'], i['date'] # id игрока и время сообщения
             if player not in users_time.keys(): # Если игрок еще никогда не играл
                 users_time[player] = 0
-            if users_time[player] < time: # Если это не спам, то начинаем играть
+            if users_time[player] < times: # Если это не спам, то начинаем играть
                 out = open('talking.txt','w')
                 out.write('gameBegan with '+str(player)) # Лог by Игорь
                 out.close()
@@ -55,11 +61,12 @@ try:
                 users_file = open('users.txt','w') # Переписываем весь файл. TODO: Более элегантное решение
                 users_time[player] = i['date'] # Обновляем время последней игры
                 for ids in users_time.keys():
-                    users_file.write(str(ids)+' '+str(users_time[ids]))
+                    users_file.write(str(ids)+' '+str(users_time[ids]) + '\n')
                 users_file.close()
 except KeyboardInterrupt or SystemExit: # Если вы решили выйти
     os.remove('bot2.txt')
-    for ids in users_time.keys():
-        users_file.write(str(ids) + ' ' + str(users_time[ids]))
-    users_file.close()
     users_file = open('users.txt', 'w')
+    for ids in users_time.keys():
+        users_file.write(str(ids) + ' ' + str(users_time[ids]) + '\n')
+    users_file.close()
+    exit(0)
