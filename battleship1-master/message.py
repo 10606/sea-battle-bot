@@ -40,8 +40,8 @@ def messages_send(to_id, msg):
                 capt_url=v['error']['captcha_img']
                 sid=v['error']['captcha_sid']
                 new_msg='Для продолжения игры введите капчу '
-                session = vk.Session(access_token=captcha)
-                api = vk.API(session)
+                session = vk.Session(access_token=captcha,)
+                api = vk.API(session,v='5.38')
                 url = capt_url
                 img = urllib.request.urlopen(url).read()
                 out = open('images/captcha.jpg','wb')
@@ -56,10 +56,9 @@ def messages_send(to_id, msg):
                 r = r.json()
                 print('get photo id')
                 photo_id = api.photos.saveMessagesPhoto(photo = r['photo'], server = r['server'], hash = r['hash'])
-                #print(photo_id)
-                photo_id=photo_id[0]['id']
+                photo_id='photo'+str(photo_id[0]['owner_id'])+'_'+str(photo_id[0]['id'])
                 print('sending message')
-                api.messages.send(user_id = bot1, message='Чтобы продолжить игру введите эту капчу (прямо сюда)', attachment = photo_id)
+                api.messages.send(peer_id = str(int(bot1)+2000000000), message='Чтобы продолжить игру введите эту капчу (прямо сюда)', attachment = photo_id)
                 time.sleep(TL)
                 api.messages.send(user_id = bot2, message='Чтoбы продолжить игру введите эту капчу (прямо сюда)', attachment = photo_id)
                 print('ready')
@@ -67,24 +66,16 @@ def messages_send(to_id, msg):
                     flag=True
                     time.sleep(TL)
                     new_msg = api.messages.getHistory(offset=0, count=1, user_id=bot2, rev=0)
-                    mesg=new_msg[1]['body']
-                    print(mesg)
-                    if (len(new_msg) == 0):
-                        flag=False
-                    print(new_msg[1]['uid'])
-                    if (str(new_msg[1]['uid']) != str(bot2)):
+                    mesg=new_msg['items'][0]['body']
+                    if (len(mesg) >= 10):
                         flag=False
                     if flag:
                         break
                     flag=True
                     time.sleep(TL)
-                    new_msg = api.messages.getHistory(offset=0, count=1, user_id=bot1, rev=0)
-                    mesg=new_msg[1]['body']
-                    print(mesg)
+                    new_msg = api.messages.getHistory(offset=0, count=1, peer_id=str(int(bot1)+2000000000), rev=0)
+                    mesg=new_msg['items'][0]['body']
                     if (len(new_msg) == 0 or len(mesg)>=10):
-                        flag=False
-                    print(new_msg[1]['uid'])
-                    if (str(new_msg[1]['uid']) != str(bot1)):
                         flag=False
                     if flag:
                         break
@@ -96,7 +87,7 @@ def messages_send(to_id, msg):
                 if len(str(r.text))>25:
                     api.messages.send(user_id = bot2, message='Введите другую капчу')
                     time.sleep(1)
-                    api.messages.send(user_id = bot1, message='Введите другую кaпчу')
+                    api.messages.send(peer_id = str(int(bot1)+2000000000), message='Введите другую кaпчу')
                     continue
                 else:
                     break
@@ -104,4 +95,6 @@ def messages_send(to_id, msg):
                 break
         except Exception as e:
             print(e)
+            sys.exit(0)
             time.sleep(TL)
+    
