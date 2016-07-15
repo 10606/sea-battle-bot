@@ -1,13 +1,14 @@
 import requests, sys,time,json, urllib.request,vk
 TL = 2
-token = 0; bo = 0; bot1 = 0; bot2 = 0; captcha = 0 
+token = 0; bo = 0; bot1 = 0; bot2 = 0; captcha = 0; id_bot1 = 0
 def login_messages():
-    global token, bo, bot1, bot2, captcha
+    global token, bo, bot1, bot2, captcha, id_bot1
     sys.stdin=open('token_server.txt','r')
     token=input()
     sys.stdin.close()
     sys.stdin=open('bot1.txt','r')
     bo=input()
+    id_bot1 = bo
     sys.stdin.close()
     sys.stdin=open('capt_chat.txt','r')
     bot1=input()
@@ -21,6 +22,7 @@ def login_messages():
 
 #отправляет сообщение пользователю to_id (с обходом капчи)
 def messages_send(to_id, msg):
+    time_start = time.time()
     if str(to_id) == bo:
         #print('msg =', msg)
         out = open('talking.txt','w')
@@ -30,6 +32,12 @@ def messages_send(to_id, msg):
         return
     print('sending message to ',to_id)
     while True:
+        if time.time()-time_start > 900:
+            res = open('result.txt','w')
+            res.write('draw')
+            res.close()
+            messages_send(str(id_bot1),'Победа')
+            sys.exit(0)
         try:
             url='https://api.vk.com/method/messages.send?message='+str(msg)+'&user_id='+str(to_id)+'&access_token='+str(token)+'&v=5.52'
             r=requests.get(url)
@@ -96,4 +104,3 @@ def messages_send(to_id, msg):
         except Exception as e:
             print(e)
             time.sleep(TL)
-    

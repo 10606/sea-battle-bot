@@ -10,7 +10,17 @@ session=Session(access_token=token)
 api=API(session)
 #отсылает фото текущего состояния поля пользователю
 def send_field_to_user(usrid,msg):
+    time_start = time.time()
     while True:
+        if time.time()-time_start > 900:
+            res = open('result.txt','w')
+            res.write('draw')
+            res.close()
+            id_=open('bot1.txt','r')
+            id1=id_.read()[:-1]
+            messages_send(id1,'Победа')
+            id_.close()
+            sys.exit(0)
         try:
             ans=api.photos.getMessagesUploadServer()
             print('sending photo')
@@ -196,9 +206,6 @@ msg = 'Соперник выстрелил в A3 и ранил ваш кораб
 for i in range(3):
     get_result(field,field,usrid)
 print(time.time())'''
-
-
-
 
 
 
