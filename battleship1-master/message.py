@@ -81,7 +81,7 @@ def messages_send(to_id, msg):
                     new_msg = api.messages.getHistory(offset=0, count=1, user_id=bot1, rev=0)
                     mesg=new_msg[1]['body']
                     print(mesg)
-                    if (len(new_msg) == 0):
+                    if (len(new_msg) == 0 or len(mesg)==0):
                         flag=False
                     print(new_msg[1]['uid'])
                     if (str(new_msg[1]['uid']) != str(bot1)):

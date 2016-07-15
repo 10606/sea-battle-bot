@@ -40,6 +40,8 @@ try:
                 time.sleep(2)
         if len(messages) == 1:
             continue
+        #print(len(messages))
+        #print(messages)
         for i in messages[-1::-1]: # Пока не отработаем все старые сообщения, новые не принимаем
             if type(i) is int:
                 continue
