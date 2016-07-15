@@ -88,7 +88,7 @@ def get_request(userid): #получение запроса от userid
     start_time=time.time()
     while (1):
         #print(time.time()-start_time, firstmsgbot)
-        if time.time()-start_time>900 and (1 not in firstmsgbot):
+        if time.time()-start_time>900:
             print('Time Limit')
             messages_send(userid,'Поражение')
             if str(userid)!=str(id_bot1):
