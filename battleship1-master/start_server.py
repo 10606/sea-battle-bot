@@ -77,20 +77,20 @@ try:
                     users_file.write(str(ids)+' '+str(users_time[ids]) + '\n')
                 users_file.close()
                 api.wall.delete(post_id=postId)
-                playerNameRes = api.users.get(users_id=player)[0]
-                result = open('result','r')
+                playerNameRes = api.users.get(user_ids=player)[0]
+                result = open('result.txt','r')
                 res = result.readline()
                 result.close()
                 if res == 'victory':
                     api.wall.post(message='''Поздравляем! @id{0}({1}) только что выиграл у бота в морской бой! Ты тоже сможешь!
-О том, как сыграть, можно прочитать в официальной группе проекта:https://vk.com/battleship_chat'''.format(player,playerNameRes))
+О том, как сыграть, можно прочитать в официальной группе проекта: https://vk.com/battleship_chat'''.format(player, playerNameRes['first_name'] + ' ' + playerNameRes['last_name']))
                 elif res == 'lose':
                     api.wall.post(message="""К сожалению, @id{0}({1}) только что проиграл боту в морской бой. Может быть, именно ты сможешь выиграть?
-О том, как сыграть, можно прочитать в официальной группе проекта:https://vk.com/battleship_chat""".format(player,playerNameRes))
+О том, как сыграть, можно прочитать в официальной группе проекта: https://vk.com/battleship_chat""".format(player,playerNameRes['first_name'] + ' ' + playerNameRes['last_name']))
                 else:
                     api.wall.post(message="""К сожалению, партия @id{0}({1}) и бота не была окончена. Если проблема на нашей стороне, то ошибка будет устранена в ближайшее время.
-О любых ошибках сообщайте в официальную группу проекта:""".format(player,playerName))
-                postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта:https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
+О любых ошибках сообщайте в официальную группу проекта: https://vk.com/battleship_chat""".format(player,playerName['first_name'] + ' ' + playerName['last_name']))
+                postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта: https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
                 api.wall.pin(post_id=postId)  # Закрепляем запись
 except KeyboardInterrupt or SystemExit: # Если вы решили выйти
     api.wall.delete(post_id=postId)
