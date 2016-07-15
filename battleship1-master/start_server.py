@@ -39,6 +39,8 @@ try:
                 time.sleep(2)
         if len(messages) == 1:
             continue
+        print(len(messages))
+        print(messages)
         for i in messages[-1::-1]: # Пока не отработаем все старые сообщения, новые не принимаем
             if type(i) is int:
                 continue
@@ -59,7 +61,7 @@ try:
                 serv.join() # Ждем завершения всех потоков
                 bot.join()
                 users_file = open('users.txt','w') # Переписываем весь файл. TODO: Более элегантное решение
-                users_time[player] = i['date'] # Обновляем время последней игры
+                users_time[player] = int(time.time()) # Обновляем время последней игры
                 for ids in users_time.keys():
                     users_file.write(str(ids)+' '+str(users_time[ids]) + '\n')
                 users_file.close()
