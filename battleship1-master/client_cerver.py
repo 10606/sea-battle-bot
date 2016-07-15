@@ -15,6 +15,25 @@ ranen = ['Paнeниe','Paнeние','Paнениe','Paнение','Pанeниe','
 ubit = ['Убит','убит','Убил','убил'] 
 
 token, id_server, api, killed, last_message = 0, 0, 0, 0, 0
+#получение сообщения
+def message_get1():
+    while True:
+        #print('я тута')
+        msg=''
+        try:
+            in_= open('talking.txt','r')
+            z = in_.read()
+            #print('z =',z)
+            in_.close()
+            if z[:6] == 'server':
+                msg = z[7:]
+                #print(msg)
+                break
+            else:
+                return '*'
+        except Exception as e:
+            print(e)
+    return msg
 
 #получение сообщения
 def message_get():
@@ -36,7 +55,7 @@ def message_get():
     
 #отправляет запрос по координатам x y
 def send_message(x,y):
-    letter = 'ABCDEFGHIJ'
+    letter = 'ABCDEFGHIJKL'
     ctr=0
     while 1:
         ctr+=1
@@ -54,12 +73,15 @@ def send_message(x,y):
     
 # принимаем сообщение соперника о его выстреле (строка вида <буква ABCDEFGHIJ><число 12345678910>, иначе - ошибка)
 def get_coordinate():
-    letter = 'ABCDEFGHIJ'
+    letter = 'ABCDEFGHIJKL'
     msg=message_get()
     return [int(msg[1:]), letter.index(msg[0])+1]
             
 # принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, иначе - ошибка)
 def get_answer(a,b):
+    msg = message_get1()
+    if msg == 'Поражение' or msg=='Победа':
+        sys.exit(0)
     send_message(a,b)
     while True:
         msg=message_get()
