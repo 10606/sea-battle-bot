@@ -95,6 +95,5 @@ def messages_send(to_id, msg):
                 break
         except Exception as e:
             print(e)
-            sys.exit(0)
             time.sleep(TL)
     
