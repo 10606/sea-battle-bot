@@ -39,16 +39,11 @@ try:
         while True:
             try:
                 new_friends = api.friends.getRequests(count = 1000, out = 0)
+                time.sleep(2)
                 if new_friends:
                     for friend in new_friends:
                         api.friends.add(user_id = friend)
-                else:
-                    break
-            except Exception as e:
-                print(e)
-        while True:
-            try:
-                time.sleep(2)
+                        time.sleep(2)
                 messages = api.messages.search(q='хочу играть',count=100) # Кодовое слово для начала игры
                 break
             except Exception as e:
