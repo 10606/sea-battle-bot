@@ -221,7 +221,8 @@ def send_field():
         #print('hey',temp)
         if temp == "1":
             return
-        
+        elif temp=='Победа' or temp=='Поражение':
+            sys.exit(0)
 
 # процесс игры
 def init():

@@ -12,9 +12,15 @@ token.close()
 botOfff = open('post.txt','r')
 botoff = botOfff.readline()
 botOfff.close()
-api.wall.delete(post_id=botoff) # Удаляем запись о том, что бот отключен
-postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта:https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
-api.wall.pin(post_id=postId)                    # Закрепляем запись
+while True:
+    try:
+        #api.wall.delete(post_id=botoff) # Удаляем запись о том, что бот отключен
+        postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта: https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
+        break
+    except Exception as e:
+        print(e)
+        time.sleep(2)
+#api.wall.pin(post_id=postId)                    # Закрепляем запись
 # Чтение всех пользователей, даты последней игры. "Антиспам"
 try:
     users_file = open('users.txt','r')
@@ -61,12 +67,24 @@ try:
                 out = open('talking.txt','w')
                 out.write('gameBegan with '+str(player)) # Лог by Игорь
                 out.close()
-                playerName = api.users.get(user_ids=player,name_case='ins')[0]
-                api.wall.delete(post_id=postId)
-                postId = api.wall.post(message='Сейчас идет игра с @id{1}({0}). Бот занят. \n Хочешь поиграть? Смотри, как это сделать, тут: https://vk.com/battleship_chat '.format(
-                    playerName['first_name'] + ' ' + playerName['last_name'],
-                    player))['post_id'] # Публикуем пост о том, что бот занят
-                api.wall.pin(post_id=postId)
+                while True:
+                    try:
+                        playerName = api.users.get(user_ids=player,name_case='ins')[0]
+                        break
+                    except Exception as e:
+                        print(e)
+                        time.sleep(2)
+                #api.wall.delete(post_id=postId)
+                while True:
+                    try:
+                        postId = api.wall.post(message='Сейчас идет игра с @id{1}({0}). Бот занят. \n Хочешь поиграть? Смотри, как это сделать, тут: https://vk.com/battleship_chat '.format(
+                            playerName['first_name'] + ' ' + playerName['last_name'],
+                            player))['post_id'] # Публикуем пост о том, что бот занят
+                        break
+                    except Exception as e:
+                        print(e)
+                        time.sleep(2)
+                #api.wall.pin(post_id=postId)
                 record = open('bot2.txt','w') # Пишем в файл id игрока для мэина
                 record.write(str(player))
                 record.close()
@@ -81,27 +99,46 @@ try:
                 for ids in users_time.keys():
                     users_file.write(str(ids)+' '+str(users_time[ids]) + '\n')
                 users_file.close()
-                api.wall.delete(post_id=postId)
-                playerNameRes = api.users.get(user_ids=player)[0]
-                result = open('result.txt','r')
-                res = result.readline()
-                result.close()
-                if res == 'victory':
-                    api.wall.post(message='''Поздравляем! @id{0}({1}) только что выиграл у бота в морской бой! Ты тоже сможешь!
+                while True:
+                    try:
+                        #api.wall.delete(post_id=postId)
+                        playerNameRes = api.users.get(user_ids=player)[0]
+                        result = open('result.txt','r')
+                        res = result.readline()
+                        result.close()
+                        if res == 'victory':
+                            api.wall.post(message='''Поздравляем! @id{0}({1}) только что выиграл у бота в морской бой! Ты тоже сможешь!
 О том, как сыграть, можно прочитать в официальной группе проекта: https://vk.com/battleship_chat'''.format(player, playerNameRes['first_name'] + ' ' + playerNameRes['last_name']))
-                elif res == 'lose':
-                    api.wall.post(message="""К сожалению, @id{0}({1}) только что проиграл боту в морской бой. Может быть, именно ты сможешь выиграть?
+                        elif res == 'lose':
+                            api.wall.post(message="""К сожалению, @id{0}({1}) только что проиграл боту в морской бой. Может быть, именно ты сможешь выиграть?
 О том, как сыграть, можно прочитать в официальной группе проекта: https://vk.com/battleship_chat""".format(player,playerNameRes['first_name'] + ' ' + playerNameRes['last_name']))
-                else:
-                    api.wall.post(message="""К сожалению, партия @id{0}({1}) и бота не была окончена. Если проблема на нашей стороне, то ошибка будет устранена в ближайшее время.
+                        else:
+                            api.wall.post(message="""К сожалению, партия между @id{0}({1}) и ботом не была окончена. Если проблема на нашей стороне, то ошибка будет устранена в ближайшее время.
 О любых ошибках сообщайте в официальную группу проекта: https://vk.com/battleship_chat""".format(player,playerName['first_name'] + ' ' + playerName['last_name']))
-                postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта: https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
-                api.wall.pin(post_id=postId)  # Закрепляем запись
+                        break
+                    except Exception as e:
+                        print(e)
+                        time.sleep(2)
+                while True:
+                    try:
+                        postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта: https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
+                        #api.wall.pin(post_id=postId)  # Закрепляем запись
+                        break
+                    except Exception as e:
+                        print(e)
+                        time.sleep(2)
+                        
 except KeyboardInterrupt or SystemExit: # Если вы решили выйти
-    api.wall.delete(post_id=postId)
-    pId = api.wall.post(message='Бот выключен.\n'
-                                'Узнай о его включении в официальной группе проекта: https://vk.com/battleship_chat !')['post_id']
-    api.wall.pin(post_id=pId)
+    #api.wall.delete(post_id=postId)
+    while True:
+        try:
+            pId = api.wall.post(message='Бот выключен.\n'
+                                        'Узнай о его включении в официальной группе проекта: https://vk.com/battleship_chat !')['post_id']
+            #api.wall.pin(post_id=pId)
+            break
+        except Exception as e:
+            print(e)
+            time.sleep(2)
     post = open('post.txt', 'w')
     post.write(str(pId))
     post.close()

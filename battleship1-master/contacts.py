@@ -88,9 +88,12 @@ def get_request(userid): #получение запроса от userid
     start_time=time.time()
     while (1):
         #print(time.time()-start_time, firstmsgbot)
-        if time.time()-start_time>900:
+        if time.time()-start_time>120:
             print('Time Limit')
-            messages_send(userid,'Поражение')
+            messages_send(userid,'Время ожидания истекло. Игра окончена.')
+            out = open('result.txt','w')
+            out.write('draw')
+            out.close()
             if str(userid)!=str(id_bot1):
                 messages_send(str(id_bot1),'Победа')
             else:

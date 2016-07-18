@@ -32,7 +32,7 @@ def messages_send(to_id, msg):
         return
     print('sending message to ',to_id)
     while True:
-        if time.time()-time_start > 900:
+        if time.time()-time_start > 120:
             res = open('result.txt','w')
             res.write('draw')
             res.close()

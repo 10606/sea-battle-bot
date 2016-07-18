@@ -12,7 +12,7 @@ api=API(session)
 def send_field_to_user(usrid,msg):
     time_start = time.time()
     while True:
-        if time.time()-time_start > 900:
+        if time.time()-time_start > 120:
             res = open('result.txt','w')
             res.write('draw')
             res.close()
