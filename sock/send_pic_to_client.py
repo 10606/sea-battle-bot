@@ -43,10 +43,11 @@ def send_to_client1(msg, index):  # отправляет большое сооб
 
     t_time = time.time()
     i = 0
+    split_len = 1400
     while i < len(msg):
         while 1:
             try:
-                temp = msg[i:min(len(msg), i + 1000)]
+                temp = msg[i:min(len(msg), i + split_len)]
                 temm = get_pref(i, len(temp) + 20)
                 temr = temm + temp
                 conn[index].send(temr)
@@ -64,7 +65,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                             flag = 0
                             break
                 if (flag == 1):
-                    i += 1000
+                    i += split_len
                     break
                 else:
                     continue
