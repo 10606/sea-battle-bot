@@ -18,9 +18,12 @@ def get_pref(index, length):  # создает заголовок пакета �
 
 def send_to_client1(msg, index):  # отправляет большое сообщение msg сначала размер потом по частям содержание
     t_time = time.time()
+    split_len = 1000
+    count_pack = math.ceil(len(msg) / split_len)
     while 1:
         try:
-            temp = str(len(msg)).encode()
+
+            temp = (str(count_pack)).encode('utf-8')
             temp = get_pref(0, len(temp) + 20) + temp
             conn[index].send(temp)
             break
@@ -32,46 +35,94 @@ def send_to_client1(msg, index):  # отправляет большое сооб
     t_time = time.time()
     while 1:
         try:
-            data = conn[index].recv(10000)
+            data = conn[index].recv(100)
             ttmp = data.decode('utf-8')
-            if ((len(ttmp) >= len("134")) and (ttmp[-len("134"):] == "134")):
+            if ((len(ttmp) >= len("9999999999")) and (ttmp[-len("9999999999"):] == "9999999999")):
                 break
         except Exception as e:
             if (time.time() - t_time > 60):
                 print(e, " get accept len from client ", index)
                 return "*"
 
+
     t_time = time.time()
     i = 0
-    split_len = 1400
-    while i < len(msg):
+
+    #while i < len(msg):
+    while i < count_pack:
         while 1:
             try:
-                temp = msg[i:min(len(msg), i + split_len)]
+                position = i * split_len
+                temp = msg[position:min(len(msg), position + split_len)]
                 temm = get_pref(i, len(temp) + 20)
                 temr = temm + temp
                 conn[index].send(temr)
-                flag = 0
-                tt_time = time.time()
-                while 1:
-                    try:
-                        data = conn[index].recv(10000)
-                        ttmp = data.decode('utf-8')
-                        if ((len(ttmp) >= len("134")) and (ttmp[-len("134"):] == "134")):
-                            flag = 1
-                            break
-                    except Exception as e:
-                        if (time.time() - tt_time > 0.1):
-                            flag = 0
-                            break
-                if (flag == 1):
-                    i += split_len
-                    break
-                else:
-                    continue
+                break
             except Exception as e:
                 if (time.time() - t_time > 60):
                     print(e, " send picture to client ", index)
+                    return "*"
+        i += 1
+
+    t_time = time.time()
+    while 1:
+        try:
+            temp = ""
+            temm = get_pref(9999999999, 20)
+            temr = temm
+            conn[index].send(temr)
+            break
+        except Exception as e:
+            if (time.time() - t_time > 10):
+                print(e, " send picture to client ", index)
+                return "*"
+    while (1):
+        t_time = time.time()
+        time_acc = time.time()
+        index_pac = 0
+        ttmp = 0
+        while (1):
+            if (time.time() - t_time > 40):
+                return "*"
+            try:
+                data = conn[index].recv(10)
+                ttmp = data.decode('utf-8')
+                if (ttmp == "9999999999"):
+                    return
+                ttmp = int(ttmp)
+                index_pac = int(int(ttmp) * split_len)
+                print(ttmp, "req client ", index)
+                break
+            except Exception as e:
+                if (time.time() - t_time > 60):
+                    print(e, " get index from client ", index, "get request")
+                    return "*"
+                if (time.time() - time_acc > 5):
+                    time_acc = time.time()
+                    while 1:
+                        try:
+                            print(" send picture to client ", index, "send accept")
+                            temp = ""
+                            temm = get_pref(9999999999, 20)
+                            temr = temm
+                            conn[index].send(temr)
+                            break
+                        except Exception as e:
+                            if (time.time() - t_time > 10):
+                                print(e, " send picture to client ", index, "send accept")
+                                return "*"
+        while (1):
+            try:
+                temp = msg[index_pac : min(len(msg), index_pac + split_len)]
+                temm = get_pref(ttmp, len(temp) + 20)
+                temr = temm + temp
+                print("send msg = ", temm, type(temr), len(temr))
+                conn[index].send(temr)
+                print(ttmm, "send client ", index)
+                break
+            except Exception as e:
+                if (time.time() - t_time > 60):
+                    print(e, " send picture to client ", index, "send request")
                     return "*"
 
 
