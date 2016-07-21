@@ -23,7 +23,7 @@ def send_accept(sock, msg): #отправляет подтвердение се�
                 return "*"
 
 def get_list_byte(sock, i): #получает часть картинки читая заголовок а потом основную часть таймаут 420
-    print("сука блять нахуй работай")
+    #print("сука блять нахуй работай")
     msg = ""
     t_time = time.time()
     time_a = time.time()
@@ -49,7 +49,7 @@ def get_list_byte(sock, i): #получает часть картинки чит
             data = sock.recv(20)
             if (len(data) < 20):
                 continue
-            print("data", data)
+            #print("data", data)
             pos1 = data[0:10]
             pos0 = (pos1).decode('utf-8')
             #pos0 = str(get_one_byte) + pos0
@@ -88,9 +88,9 @@ def get_list_byte(sock, i): #получает часть картинки чит
         msg = data
         if (len(msg) > 0):
             break
-    print(pos, "index")
-    if (pac_accept[pos] == ""):
-        print("pac empty")
+    #print(pos, "index")
+    #if (pac_accept[pos] == ""):
+    #    print("pac empty")
     #print(pac_accept[pos], "fill")
     pac_accept[pos] = msg
     return msg
@@ -124,6 +124,8 @@ def get_pic(file_name,sock): #читает длину, получает  пол�
         data = "*"
         while (data != "+"):
             data = get_list_byte(sock, dwreadbuf)
+            if (pac_accept.count("") == 0):
+                break
             if (iter > 100000):
                 stdout.close()
                 return "*"
@@ -133,13 +135,13 @@ def get_pic(file_name,sock): #читает длину, получает  пол�
             iter += 1
         data = "*"
         for j in range(len(pac_accept)):
-            print("type pac_accept[j] = ", type(pac_accept[j]), " j = ", j)
+            #print("type pac_accept[j] = ", type(pac_accept[j]), " j = ", j)
             if (pac_accept[j] == ""):
-                print(j, "getter")
+                #print(j, "getter")
                 if (send_accept(sock, j) == "*"):
                     stdout.close()
                     return "*"
-        print(pac_accept.count(""), "сука нахуй заебал работай блять")
+        #print(pac_accept.count(""), "сука нахуй заебал работай блять")
     if (send_accept(sock, 9999999999) == "*"):
         stdout.close()
         return "*"

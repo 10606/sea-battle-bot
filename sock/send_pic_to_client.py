@@ -97,7 +97,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                 if (time.time() - t_time > 60):
                     print(e, " get index from client ", index, "get request")
                     return "*"
-                if (time.time() - time_acc > 5):
+                if (time.time() - time_acc > 1):
                     time_acc = time.time()
                     while 1:
                         try:
@@ -108,7 +108,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                             conn[index].send(temr)
                             break
                         except Exception as e:
-                            if (time.time() - t_time > 10):
+                            if (time.time() - time_acc > 10):
                                 print(e, " send picture to client ", index, "send accept")
                                 return "*"
         while (1):
@@ -116,9 +116,9 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                 temp = msg[index_pac : min(len(msg), index_pac + split_len)]
                 temm = get_pref(ttmp, len(temp) + 20)
                 temr = temm + temp
-                print("send msg = ", temm, type(temr), len(temr))
+                #print("send msg = ", temm, type(temr), len(temr))
                 conn[index].send(temr)
-                print(ttmm, "send client ", index)
+                #print(ttmm, "send client ", index)
                 break
             except Exception as e:
                 if (time.time() - t_time > 60):
