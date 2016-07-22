@@ -57,6 +57,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                 temm = get_pref(i, len(temp) + 20)
                 temr = temm + temp
                 conn[index].send(temr)
+                time.sleep(0.001)
                 break
             except Exception as e:
                 if (time.time() - t_time > 60):
