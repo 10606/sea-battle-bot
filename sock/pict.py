@@ -138,6 +138,7 @@ def get_pic(file_name,sock): #читает длину, получает  пол�
             #print("type pac_accept[j] = ", type(pac_accept[j]), " j = ", j)
             if (pac_accept[j] == ""):
                 #print(j, "getter")
+                time.sleep(0.001)
                 if (send_accept(sock, j) == "*"):
                     stdout.close()
                     return "*"

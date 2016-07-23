@@ -1,4 +1,4 @@
-import sys, time, math, random, socket
+import sys, time, math, random, socket, threading
 from contacts_sock import *
 
 def get_null_string(gg):  # дописывает 0 в начало строки до длины 10
@@ -130,8 +130,12 @@ def send_to_client1(msg, index):  # отправляет большое сооб
 def send_pic(file_name, index):  # отправляет картинку
     sin = open(file_name, 'rb')  ###
     send = sin.read()
+    thr = threading.Thread(target = send_to_client1, args = [send, index])
+    thr.start()
+    '''
     if (send_to_client1(send, index) == "*"):
         sin.close()
         print("client ", index, " not get picture")
         return "*"
+    '''
     sin.close()

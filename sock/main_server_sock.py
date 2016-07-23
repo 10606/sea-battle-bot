@@ -388,6 +388,8 @@ while (1):
     empty = 0
     t.append("")
     t[my_index // 2] = threading.Thread(target=main)
+    while (threading.activeCount() > 10):
+        time.sleep(1)
     t[my_index // 2].start()
     #main()
     temp = 1
