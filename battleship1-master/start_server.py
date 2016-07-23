@@ -74,7 +74,13 @@ try:
                     except Exception as e:
                         print(e)
                         time.sleep(2)
-                #api.wall.delete(post_id=postId)
+                while True:
+                    try:
+                        api.wall.delete(post_id=postId)
+                        break
+                    except Exception as e:
+                        print(e)
+                        time.sleep(2)
                 while True:
                     try:
                         postId = api.wall.post(message='Сейчас идет игра с @id{1}({0}). Бот занят. \n Хочешь поиграть? Смотри, как это сделать, тут: https://vk.com/battleship_chat '.format(
@@ -101,7 +107,13 @@ try:
                 users_file.close()
                 while True:
                     try:
-                        #api.wall.delete(post_id=postId)
+                        while True:
+                            try:
+                                api.wall.delete(post_id=postId)
+                                break
+                            except Exception as e:
+                                print(e)
+                                time.sleep(2)
                         playerNameRes = api.users.get(user_ids=player)[0]
                         result = open('result.txt','r')
                         res = result.readline()
@@ -129,7 +141,13 @@ try:
                         time.sleep(2)
                         
 except KeyboardInterrupt or SystemExit: # Если вы решили выйти
-    #api.wall.delete(post_id=postId)
+    while True:
+        try:
+            api.wall.delete(post_id=postId)
+            break
+        except Exception as e:
+            print(e)
+            time.sleep(2)
     while True:
         try:
             pId = api.wall.post(message='Бот выключен.\n'
