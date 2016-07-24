@@ -18,6 +18,17 @@ def get_pref(index, length):  # создает заголовок пакета �
 
 def send_to_client1(msg, index):  # отправляет большое сообщение msg сначала размер потом по частям содержание
     t_time = time.time()
+    while 1:
+        try:
+            data = conn[index].recv(100)
+            ttmp = data.decode('utf-8')
+            if ((len(ttmp) >= len("9999999999")) and (ttmp[-len("9999999999"):] == "9999999999")):
+                break
+        except Exception as e:
+            if (time.time() - t_time > 60):
+                print(e, " get accept len from client ", index)
+                return "*"
+    t_time = time.time()
     split_len = 1000
     count_pack = math.ceil(len(msg) / split_len)
     while 1:
@@ -89,6 +100,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                 data = conn[index].recv(10)
                 ttmp = data.decode('utf-8')
                 if (ttmp == "9999999999"):
+                    print("client", index, "get picture")
                     return
                 ttmp = int(ttmp)
                 index_pac = int(int(ttmp) * split_len)
@@ -125,6 +137,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                 if (time.time() - t_time > 60):
                     print(e, " send picture to client ", index, "send request")
                     return "*"
+
 
 
 def send_pic(file_name, index):  # отправляет картинку

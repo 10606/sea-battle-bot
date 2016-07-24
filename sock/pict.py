@@ -49,7 +49,13 @@ def get_list_byte(sock, i): #получает часть картинки чит
             read_siz = 20
             data = b''
             while (1):
-                datas = sock.recv(read_siz)
+                try:
+                    datas = sock.recv(read_siz)
+                except Exception as e:
+                    if (time.time() - t_time > 420):
+                        print(e)
+                        return "*"
+                    continue
                 read_siz -= len(datas)
                 data += datas
                 if (read_siz == 0):
@@ -103,16 +109,22 @@ def get_list_byte(sock, i): #получает часть картинки чит
 
 
 def get_pic(file_name,sock): #читает длину, получает  получает часть картинки от get_list_byte и пишет  в файл таймуат 420
+    start_time = 0
+    flag = 0
+    if flag:
+        print(time.time())
+    start_time = time.time()
+    if (send_accept(sock, 9999999999) == "*"):
+        stdout.close()
+        return "*"
     pac_accept.clear()
     pac_accept.append("")
-    flag = 0
+
     temp = get_list_byte(sock, 0)
     if (temp == "*"):
         return "*"
     pac_accept[0] = ""
     size = int(temp)
-    if flag:
-        print(time.time())
     t_time = time.time()
     if (send_accept(sock, 9999999999) == "*"):
         return "*"
@@ -125,6 +137,10 @@ def get_pic(file_name,sock): #читает длину, получает  пол�
     iter = 0
     i = 0
     #while (dwreadbuf < size):
+    if flag:
+        print(time.time())
+    print("время получения данных для приема картинки: ", time.time() - start_time)
+    start_time = time.time()
     while (pac_accept.count("") != 0):
         data = "*"
         while (data != "+"):
@@ -159,4 +175,5 @@ def get_pic(file_name,sock): #читает длину, получает  пол�
     stdout.close()
     if flag:
         print(time.time())
+    print("время приема картинки: ", time.time() - start_time)
 
