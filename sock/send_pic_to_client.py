@@ -35,7 +35,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
     t_time = time.time()
     while 1:
         try:
-            data = conn[index].recv(100)
+            data = conn[index].recv(10)
             ttmp = data.decode('utf-8')
             if ((len(ttmp) >= len("9999999999")) and (ttmp[-len("9999999999"):] == "9999999999")):
                 break
@@ -69,7 +69,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
     while 1:
         try:
             temp = ""
-            temm = get_pref(9999999999, 20)
+            temm = get_pref(0, 20)
             temr = temm
             conn[index].send(temr)
             break
@@ -104,7 +104,7 @@ def send_to_client1(msg, index):  # отправляет большое сооб
                         try:
                             print(" send picture to client ", index, "send accept")
                             temp = ""
-                            temm = get_pref(9999999999, 20)
+                            temm = get_pref(0, 20)
                             temr = temm
                             conn[index].send(temr)
                             break

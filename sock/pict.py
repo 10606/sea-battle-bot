@@ -46,9 +46,14 @@ def get_list_byte(sock, i): #получает часть картинки чит
     '''
     while True:
         try:
-            data = sock.recv(20)
-            if (len(data) < 20):
-                continue
+            read_siz = 20
+            data = b''
+            while (1):
+                datas = sock.recv(read_siz)
+                read_siz -= len(datas)
+                data += datas
+                if (read_siz == 0):
+                    break
             #print("data", data)
             pos1 = data[0:10]
             pos0 = (pos1).decode('utf-8')
