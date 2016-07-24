@@ -1,7 +1,44 @@
 # -*- coding: utf-8 -*-
-import sys,vk, threading, time, os
+import sys,vk, threading, time, os, atexit
 from main_server import *
 from my_algo import *
+bFirstTime = True
+global postId
+
+def nOnExit():
+    if bFirstTime:
+        return
+    iPostId = 0
+    iLastPostId = postId
+    while True:
+        try:
+            api.wall.delete(post_id=iLastPostId)
+            break
+        except Exception as e:
+            if str(e)[:3] == '100':
+                break
+            print(e)
+            time.sleep(2)
+    while True:
+        try:
+            iPostId = api.wall.post(message='Бот выключен.\n'
+                                        'Узнай о его включении в официальной группе проекта: https://vk.com/battleship_chat !')['post_id']
+            break
+        except Exception as e:
+            print(e)
+            time.sleep(2)
+    while True:
+        try:
+            api.wall.pin(post_id=iPostId)
+            break
+        except Exception as e:
+            print(e)
+            time.sleep(2)
+    post = open('post.txt', 'w')
+    post.write(str(iPostId))
+    post.close()
+    return None
+
 # Чтение токена
 lastgame = 0
 ts=int(time.time())
@@ -12,35 +49,51 @@ token.close()
 botOfff = open('post.txt','r')
 botoff = botOfff.readline()
 botOfff.close()
-while True:
+postId = 0
+try:
+    atexit.register(nOnExit)
+    bFirstTime = False
+    while True:
+        try:
+            api.wall.delete(post_id=botoff) # Удаляем запись о том, что бот отключен
+            break
+        except Exception as e:
+            print(e)
+            time.sleep(2)
+    while True:
+        try:
+            postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта: https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
+            break
+        except Exception as e:
+            print(e)
+            time.sleep(2)
+        while True:
+            try:
+                api.wall.pin(post_id=postId)   # Закрепляем запись
+                break
+            except Exception as e:
+                print(e)
+                time.sleep(2)
+
+    # Чтение всех пользователей, даты последней игры. "Антиспам"
     try:
-        #api.wall.delete(post_id=botoff) # Удаляем запись о том, что бот отключен
-        postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта: https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
-        break
-    except Exception as e:
-        print(e)
-        time.sleep(2)
-#api.wall.pin(post_id=postId)                    # Закрепляем запись
-# Чтение всех пользователей, даты последней игры. "Антиспам"
-try:
-    users_file = open('users.txt','r')
-    users_time = {}
-    reads = users_file.readline()
-    while reads != '': # While not eof
-        print(reads.split())
-        user,times = reads.split(' ')
-        users_time[int(user)] = int(times)
+        users_file = open('users.txt','r')
+        users_time = {}
         reads = users_file.readline()
-    users_file.close()
-except FileNotFoundError:
-    users_time = {}
-    print('Файл не найден!')
-    users_file = open('users.txt','w') #
-    users_file.write('')               # Создаем файл, если его не существует
-    users_file.close()                 #
-except Exception as e:
-    print('Необработанное исключение!\n Текст:\n',e) # Защита от вылетов
-try:
+        while reads != '': # While not eof
+            print(reads.split())
+            user,times = reads.split(' ')
+            users_time[int(user)] = int(times)
+            reads = users_file.readline()
+        users_file.close()
+    except FileNotFoundError:
+        users_time = {}
+        print('Файл не найден!')
+        users_file = open('users.txt','w') #
+        users_file.write('')               # Создаем файл, если его не существует
+        users_file.close()                 #
+    except Exception as e:
+        print('Необработанное исключение!\n Текст:\n',e) # Защита от вылетов:
     while True:
         while True:
             try:
@@ -90,7 +143,13 @@ try:
                     except Exception as e:
                         print(e)
                         time.sleep(2)
-                #api.wall.pin(post_id=postId)
+                    while True:
+                        try:
+                            api.wall.pin(post_id=postId)
+                            break
+                        except Exception as e:
+                            print(e)
+                            time.sleep(2)
                 record = open('bot2.txt','w') # Пишем в файл id игрока для мэина
                 record.write(str(player))
                 record.close()
@@ -107,17 +166,17 @@ try:
                 users_file.close()
                 while True:
                     try:
-                        while True:
-                            try:
-                                api.wall.delete(post_id=postId)
-                                break
-                            except Exception as e:
-                                print(e)
-                                time.sleep(2)
-                        playerNameRes = api.users.get(user_ids=player)[0]
-                        result = open('result.txt','r')
-                        res = result.readline()
-                        result.close()
+                        api.wall.delete(post_id=postId)
+                        break
+                    except Exception as e:
+                        print(e)
+                        time.sleep(2)
+                playerNameRes = api.users.get(user_ids=player)[0]
+                result = open('result.txt','r')
+                res = result.readline()
+                result.close()
+                while True:
+                    try:
                         if res == 'victory':
                             api.wall.post(message='''Поздравляем! @id{0}({1}) только что выиграл у бота в морской бой! Ты тоже сможешь!
 О том, как сыграть, можно прочитать в официальной группе проекта: https://vk.com/battleship_chat'''.format(player, playerNameRes['first_name'] + ' ' + playerNameRes['last_name']))
@@ -134,29 +193,17 @@ try:
                 while True:
                     try:
                         postId = api.wall.post(message='Бот свободен, ты можешь поиграть с ним прямо сейчас!\nКак сыграть смотри в официалной группе проекта: https://vk.com/battleship_chat')['post_id'] # Делаем запись о том, что бот свободен
-                        #api.wall.pin(post_id=postId)  # Закрепляем запись
+                        break
+                    except Exception as e:
+                        print(e)
+                        time.sleep(2)
+                while True:
+                    try:
+                        api.wall.pin(post_id=postId)
                         break
                     except Exception as e:
                         print(e)
                         time.sleep(2)
                         
 except KeyboardInterrupt or SystemExit: # Если вы решили выйти
-    while True:
-        try:
-            api.wall.delete(post_id=postId)
-            break
-        except Exception as e:
-            print(e)
-            time.sleep(2)
-    while True:
-        try:
-            pId = api.wall.post(message='Бот выключен.\n'
-                                        'Узнай о его включении в официальной группе проекта: https://vk.com/battleship_chat !')['post_id']
-            #api.wall.pin(post_id=pId)
-            break
-        except Exception as e:
-            print(e)
-            time.sleep(2)
-    post = open('post.txt', 'w')
-    post.write(str(pId))
-    post.close()
+    sys.exit(0)
