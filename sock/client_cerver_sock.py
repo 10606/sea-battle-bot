@@ -108,6 +108,7 @@ def get_answer(a,b):
     if (endgame[0] == 1):
         return 4
     if (send_message(a,b) == "*"):
+        print("Сервер не отвечает")
         endgame[0] = 1
         return 7
     while True:
@@ -117,12 +118,16 @@ def get_answer(a,b):
             return 7
         firstmsg[0] = 1
         if msg in mimo:
+            print("Мимо")
             return -1
         elif msg in ranen:
+            print("Ранил")
             return 1
         elif msg in ubit:
+            print("Убил")
             return 2
         elif msg in used:
+            print("Вы уже сюда стреляли")
             return 3
         elif ((len(msg) > len("Победа")) and (msg[-len("Победа") : ] == "Победа")):
             print("Победа")
