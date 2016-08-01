@@ -103,10 +103,17 @@ def send_message(x,y):
         except Exception as e:
             print(e, ctr)
             
-# принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, Вы уже сюда стреляли - 3, Конец игры - 4, Победа - 5, Поражение - 6, Сервер не отвечает - 7  иначе - ошибка)
+# принимаем сообщение соперника о результате нашего хода (Мимо - -1, Ранил - 1, Убил - 2, Вы уже сюда стреляли - 3, Конец игры - 4, Победа - 5, Поражение - 6, Сервер не отвечает - 7, ошибка ввода - 8,  иначе - ошибка)
 def get_answer(a,b):
     if (endgame[0] == 1):
         return 4
+     try:
+        a = int(a)
+        b = int(b)
+    except Exception as e:
+        return 8 
+    if (a > 9 or a < 0 or b > 9 or b < 0):
+        return 8    
     if (send_message(a,b) == "*"):
         print("Сервер не отвечает")
         endgame[0] = 1
@@ -157,6 +164,10 @@ def get_answer(a,b):
 def get_result(req):
     if (endgame[0] == 1):
         return "Игра уже завершена"
+    if len(req) <= 1 or len(req)>=4:
+        return 8
+    if not(65 <= ord(req[0]) <= 74 and (len(req) == 2 and 49 <= ord(req[1]) <= 57) or (len(req) == 3 and ord(req[1]) == 49 and ord(req[2]) == 48)):
+        return 8
     if (send_to_server(req) == "*"):
         endgame[0] = 1
         return ("Сервер не отвечает")
