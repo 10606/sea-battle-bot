@@ -107,7 +107,7 @@ def send_message(x,y):
 def get_answer(a,b):
     if (endgame[0] == 1):
         return 4
-     try:
+    try:
         a = int(a)
         b = int(b)
     except Exception as e:
