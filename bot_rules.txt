@@ -1,4 +1,10 @@
 ﻿Как писать бота:
+0) используемые файлы:
+	а) pict.py
+	б) client_cerver_sock.py
+	в) name.txt
+	г) port.txt
+	д) server_IP.txt
 1) для работы должно быть подключено client_cerver_sock
 2) бот должен:
 	1) подсоединиться к серверу
