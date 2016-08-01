@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #версия для игры с сервером
 #get_answer(a,b): по координатам a b [1 10] возвращает результат выстрела
 #вызвать connect_to_server()
@@ -189,6 +189,7 @@ def get_result(req):
             unique_add = str(random.randint(0, 10 ** 9))
             get_pic('result' + unique_add + '.jpg', sock)
             if py_flag:
+                res =  Image.open('result' + unique_add + '.jpg')
                 res.show()
                 res.close()
             endgame[0] = 1
