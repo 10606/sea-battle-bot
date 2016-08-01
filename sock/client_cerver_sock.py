@@ -112,7 +112,7 @@ def get_answer(a,b):
         b = int(b)
     except Exception as e:
         return 8 
-    if (a > 9 or a < 0 or b > 9 or b < 0):
+    if (a > 10 or a < 1 or b > 10 or b < 1):
         return 8    
     if (send_message(a,b) == "*"):
         print("Сервер не отвечает")
