@@ -165,9 +165,9 @@ def get_result(req):
     if (endgame[0] == 1):
         return "Игра уже завершена"
     if len(req) <= 1 or len(req)>=4:
-        return 8
+        return "Неверный формат запроса"
     if not(65 <= ord(req[0]) <= 74 and (len(req) == 2 and 49 <= ord(req[1]) <= 57) or (len(req) == 3 and ord(req[1]) == 49 and ord(req[2]) == 48)):
-        return 8
+        return "Неверный формат запроса"
     if (send_to_server(req) == "*"):
         endgame[0] = 1
         return ("Сервер не отвечает")
