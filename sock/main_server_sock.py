@@ -1,11 +1,16 @@
 ﻿# -*- coding: utf-8 -*-
+import atexit
 import sys, time, math, random, threading ## pygame
 from request import *
 from check_field import *
 from drawing import *
 from resourse import *
 from send_pic_to_client import *
-
+import requests, sys,time,json, urllib, vk
+from urllib import *
+import subprocess
+import os, atexit
+from atexit import *
 my_index = 0
 empty = 0
 
@@ -384,19 +389,51 @@ def main ():
 
 t = []
 
-while (1):
-    empty = 0
-    t.append("")
-    t[my_index // 2] = threading.Thread(target=main)
-    while (threading.activeCount() > 10):
-        time.sleep(1)
-    t[my_index // 2].start()
-    #main()
-    temp = 1
-    while (empty == 0):
-        time.sleep(1)
-        temp += 1
-    empty = 0
-    my_index += 2
+cmd1 = 'python add_adr_start.py'
+cmd2 = 'python del_adr_exit.py'
 
-ss = input()
+def nOnExit():
+    print('pop address')
+    subprocess.Popen(cmd2)
+    return None
+
+print('push address')
+atexit.register(nOnExit)
+
+
+subprocess.Popen(cmd1)
+
+def start_server_():
+    global empty
+    global my_index
+    while (1):
+        empty = 0
+        t.append("")
+        t[my_index // 2] = threading.Thread(target=main)
+        temp = 1
+        while (threading.activeCount() > 10):
+            time.sleep(1)
+            temp += 1
+        t[my_index // 2].start()
+        # main()
+        temp = 1
+        while (empty == 0):
+            time.sleep(1)
+            temp += 1
+        empty = 0
+        my_index += 2
+
+try:
+    start_server_()
+#except KeyboardInterrupt or SystemExit:
+except KeyboardInterrupt or SystemExit:
+    print("exit")
+    nOnExit()
+    sys.exit(0)
+    #gg = input()
+except Exception as e:
+    new_ip_file = open('out.txt', 'a')
+    new_ip_file.write(str(e))
+    new_ip_file.close()
+
+sys.exit(0)
