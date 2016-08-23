@@ -394,14 +394,19 @@ cmd2 = 'python del_adr_exit.py'
 
 def nOnExit():
     print('pop address')
-    subprocess.Popen(cmd2)
+    try:
+        subprocess.Popen(cmd2)
+    except Exception as e:
+        print(e)
     return None
 
 print('push address')
 atexit.register(nOnExit)
 
-
-subprocess.Popen(cmd1)
+try:
+    subprocess.Popen(cmd1)
+except Exception as e:
+    print (e)
 
 def start_server_():
     global empty
@@ -425,7 +430,6 @@ def start_server_():
 
 try:
     start_server_()
-#except KeyboardInterrupt or SystemExit:
 except KeyboardInterrupt or SystemExit:
     print("exit")
     nOnExit()
